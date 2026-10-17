@@ -54,60 +54,66 @@
       overflow-x: hidden;
     }
 
-    /* SACRED CHRISTIAN BACKGROUND ANIMATION */
-    .bg-sacred-overlay {
+    /* SACRED ANIMATED BACKGROUND */
+    .sacred-sky {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
       background: 
-        radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.18) 0%, transparent 65%),
-        radial-gradient(circle at 100% 100%, rgba(74, 18, 26, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 0% 100%, rgba(74, 18, 26, 0.06) 0%, transparent 50%);
+        radial-gradient(circle at 50% 0%, rgba(231, 211, 159, 0.3) 0%, rgba(250, 247, 240, 0.95) 60%),
+        radial-gradient(circle at 100% 100%, rgba(74, 18, 26, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 0% 100%, rgba(74, 18, 26, 0.08) 0%, transparent 60%);
     }
 
-    /* Heavenly Ray Pulse */
-    .celestial-rays {
+    /* Heavenly Beam Animation */
+    .celestial-beam {
       position: absolute;
-      top: -150px;
+      top: -120px;
       left: 50%;
       transform: translateX(-50%);
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(231, 211, 159, 0.25) 0%, rgba(197, 160, 89, 0.08) 40%, transparent 70%);
-      animation: divinePulse 10s ease-in-out infinite alternate;
+      width: 600px;
+      height: 600px;
       border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 235, 175, 0.45) 0%, rgba(197, 160, 89, 0.12) 50%, transparent 75%);
+      animation: divineGlow 8s infinite alternate ease-in-out;
     }
 
-    @keyframes divinePulse {
-      0% { transform: translateX(-50%) scale(0.9); opacity: 0.5; }
-      100% { transform: translateX(-50%) scale(1.15); opacity: 0.9; }
+    @keyframes divineGlow {
+      0% { transform: translateX(-50%) scale(0.85); opacity: 0.55; }
+      100% { transform: translateX(-50%) scale(1.2); opacity: 0.95; }
     }
 
-    /* Floating Sacred Symbols */
+    /* Upward Floating Sacred Crosses & Doves */
+    .floating-particles-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
     .sacred-particle {
       position: absolute;
-      color: rgba(197, 160, 89, 0.35);
+      color: rgba(197, 160, 89, 0.4);
       user-select: none;
-      animation: floatCrossUpward linear infinite;
       font-family: var(--font-serif);
-      filter: drop-shadow(0 0 6px rgba(231, 211, 159, 0.6));
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 0 5px rgba(231, 211, 159, 0.7));
     }
 
-    @keyframes floatCrossUpward {
+    @keyframes floatUp {
       0% {
-        transform: translateY(105vh) rotate(0deg) scale(0.7);
+        transform: translateY(105vh) rotate(0deg) scale(0.8);
         opacity: 0;
       }
-      15% {
+      20% {
+        opacity: 0.8;
+      }
+      80% {
         opacity: 0.7;
       }
-      85% {
-        opacity: 0.6;
-      }
       100% {
-        transform: translateY(-10vh) rotate(12deg) scale(1.1);
+        transform: translateY(-10vh) rotate(15deg) scale(1.2);
         opacity: 0;
       }
     }
@@ -123,12 +129,12 @@
 
     /* TOP BAR */
     header {
-      padding: 24px 0;
+      padding: 22px 0;
       border-bottom: 1px solid rgba(197, 160, 89, 0.35);
       position: sticky;
       top: 0;
-      background: rgba(250, 247, 240, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(250, 247, 240, 0.94);
+      backdrop-filter: blur(12px);
       z-index: 100;
     }
 
@@ -147,7 +153,7 @@
     }
 
     .cross-icon {
-      font-size: 24px;
+      font-size: 26px;
       color: var(--gold);
       font-family: var(--font-serif);
       filter: drop-shadow(0 2px 4px rgba(143, 107, 46, 0.3));
@@ -156,7 +162,7 @@
     .brand-title {
       font-family: var(--font-serif);
       font-size: 16px;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 700;
     }
@@ -213,7 +219,7 @@
     /* HERO SECTION */
     .hero {
       text-align: center;
-      padding: 48px 0 32px;
+      padding: 46px 0 30px;
       position: relative;
     }
 
@@ -228,7 +234,7 @@
       border: 1px solid var(--gold);
       color: var(--gold-dark);
       font-size: 24px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       box-shadow: var(--shadow-sm);
     }
 
@@ -271,11 +277,12 @@
       max-width: 650px;
       margin: 0 auto 36px;
       padding: 16px 24px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.75);
       border-radius: 12px;
       border-left: 3px solid var(--gold);
       border-right: 3px solid var(--gold);
       box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(5px);
     }
 
     .scripture-quote {
@@ -303,7 +310,7 @@
     }
 
     .tribute-card {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border: 1px solid rgba(197, 160, 89, 0.35);
       border-radius: 20px;
       padding: 32px 28px;
@@ -314,7 +321,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(6px);
+      transition: transform 0.3s ease;
+    }
+
+    .tribute-card:hover {
+      transform: translateY(-3px);
     }
 
     .tribute-card::before {
@@ -415,7 +427,7 @@
       box-shadow: 0 4px 15px rgba(74, 18, 26, 0.25);
     }
 
-    /* MEDIA PLAYERS */
+    /* MEDIA PLAYERS CONTAINER */
     .media-stage {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -424,14 +436,14 @@
     }
 
     .media-card {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       border: 1px solid rgba(197, 160, 89, 0.35);
       border-radius: 20px;
       padding: 28px;
       box-shadow: var(--shadow-md);
       display: flex;
       flex-direction: column;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(6px);
     }
 
     .media-card-header {
@@ -469,7 +481,7 @@
       color: var(--gold-dark);
     }
 
-    /* AUDIO PLAYER */
+    /* AUDIO PLAYER STYLES */
     .audio-player-box {
       background: var(--cream);
       border: 1px solid var(--gold-light);
@@ -572,7 +584,7 @@
       color: var(--text-muted);
     }
 
-    /* VIDEO PLAYER */
+    /* VIDEO PLAYER STYLES */
     .video-container {
       position: relative;
       width: 100%;
@@ -590,9 +602,9 @@
       display: block;
     }
 
-    /* CANDLE & VIGIL */
+    /* CANDLE & VIGIL SECTION */
     .candle-section {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(243, 235, 221, 0.88));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(243, 235, 221, 0.9));
       border: 1px solid rgba(197, 160, 89, 0.35);
       border-radius: 24px;
       padding: 40px 24px;
@@ -730,7 +742,7 @@
     }
 
     .tribute-submission {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       border: 1px solid rgba(197, 160, 89, 0.4);
       border-radius: 16px;
       padding: 24px;
@@ -780,6 +792,12 @@
       border-radius: 12px;
       padding: 18px 20px;
       box-shadow: var(--shadow-sm);
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .tribute-author {
@@ -844,8 +862,8 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(20, 10, 12, 0.7);
-      backdrop-filter: blur(6px);
+      background: rgba(20, 10, 12, 0.72);
+      backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -862,8 +880,8 @@
       border: 1px solid var(--gold);
       border-radius: 20px;
       width: 100%;
-      max-width: 480px;
-      padding: 32px;
+      max-width: 460px;
+      padding: 32px 24px;
       box-shadow: var(--shadow-lg);
       text-align: center;
       position: relative;
@@ -871,45 +889,56 @@
 
     .modal-close-btn {
       position: absolute;
-      top: 16px;
+      top: 14px;
       right: 16px;
       background: none;
       border: none;
-      font-size: 22px;
+      font-size: 26px;
       cursor: pointer;
       color: var(--text-muted);
+      line-height: 1;
     }
 
     .qr-card-preview {
       background: white;
       border: 2px solid var(--gold);
       border-radius: 16px;
-      padding: 24px;
-      margin: 20px 0;
+      padding: 20px;
+      margin: 20px auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      width: 250px;
     }
 
     .qr-badge-title {
       font-family: var(--font-serif);
-      font-size: 15px;
-      letter-spacing: 2px;
+      font-size: 14px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: var(--primary);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      font-weight: 700;
     }
 
     #qrcode-display {
-      margin-bottom: 14px;
-      padding: 10px;
-      background: white;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #qrcode-display canvas, #qrcode-display img {
+      max-width: 100%;
+      height: auto;
     }
 
     .qr-badge-sub {
       font-style: italic;
-      font-size: 15px;
+      font-size: 13px;
       color: var(--text-muted);
     }
 
@@ -933,15 +962,16 @@
 <body>
 
   <!-- SACRED CHRISTIAN BACKGROUND ANIMATION -->
-  <div class="bg-sacred-overlay">
-    <div class="celestial-rays"></div>
-    <!-- Floating Crosses & Dove particles -->
-    <span class="sacred-particle" style="left: 10%; font-size: 22px; animation-duration: 22s; animation-delay: 0s;">✝</span>
-    <span class="sacred-particle" style="left: 25%; font-size: 16px; animation-duration: 18s; animation-delay: 4s;">✤</span>
-    <span class="sacred-particle" style="left: 45%; font-size: 26px; animation-duration: 25s; animation-delay: 2s;">✝</span>
-    <span class="sacred-particle" style="left: 65%; font-size: 18px; animation-duration: 20s; animation-delay: 7s;">🕊️</span>
-    <span class="sacred-particle" style="left: 80%; font-size: 24px; animation-duration: 24s; animation-delay: 3s;">✝</span>
-    <span class="sacred-particle" style="left: 92%; font-size: 16px; animation-duration: 19s; animation-delay: 8s;">✤</span>
+  <div class="sacred-sky">
+    <div class="celestial-beam"></div>
+    <div class="floating-particles-wrap">
+      <span class="sacred-particle" style="left: 8%; font-size: 26px; animation-duration: 22s; animation-delay: 0s;">✝</span>
+      <span class="sacred-particle" style="left: 22%; font-size: 18px; animation-duration: 18s; animation-delay: 4s;">✤</span>
+      <span class="sacred-particle" style="left: 42%; font-size: 28px; animation-duration: 25s; animation-delay: 2s;">✝</span>
+      <span class="sacred-particle" style="left: 60%; font-size: 22px; animation-duration: 20s; animation-delay: 6s;">🕊️</span>
+      <span class="sacred-particle" style="left: 78%; font-size: 26px; animation-duration: 24s; animation-delay: 3s;">✝</span>
+      <span class="sacred-particle" style="left: 92%; font-size: 18px; animation-duration: 19s; animation-delay: 8s;">✤</span>
+    </div>
   </div>
 
   <!-- TOP BAR -->
@@ -1000,7 +1030,7 @@
       <!-- Nana Zachariah -->
       <div class="tribute-card">
         <div class="portrait-frame">
-          <img src="nana.png" alt="Nana Zachariah" class="portrait-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80';">
+          <img src="nana.png" alt="Zachariah" class="portrait-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80';">
         </div>
         <div class="person-role">Our Beloved Grandfather</div>
         <h2 class="person-name">Zachariah</h2>
@@ -1121,6 +1151,7 @@
       </div>
 
       <div class="tributes-list" id="tributesContainer">
+        <!-- Live Firebase Tributes load here automatically -->
         <div class="tribute-item">
           <div class="tribute-author">
             <span class="tribute-name">Your Loving Family</span>
@@ -1146,8 +1177,8 @@
     <div class="modal-card">
       <button class="modal-close-btn" id="closeQrBtn">&times;</button>
       <div class="sacred-cross-badge" style="width:36px; height:36px; font-size:18px; margin-bottom:10px;">✝</div>
-      <h3 style="font-family: var(--font-serif); color: var(--primary);">Memento QR Keepsake</h3>
-      <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 12px;">Scan this code to visit this memorial page</p>
+      <h3 style="font-family: var(--font-serif); color: var(--primary); margin-bottom: 6px;">Memento QR Keepsake</h3>
+      <p style="font-size: 15px; color: var(--text-muted); margin-bottom: 12px;">Scan this code to visit this memorial page</p>
 
       <div class="qr-card-preview" id="qrCardPrintArea">
         <div class="qr-badge-title">✝ Jayamma & Zachariah ✝</div>
@@ -1162,6 +1193,84 @@
   </div>
 
   <script>
+    // FIREBASE CLOUD DATABASE CONNECTION
+    const FIREBASE_DB_URL = "https://tribute-b9c8d-default-rtdb.firebaseio.com/tributes.json";
+
+    async function loadCloudTributes() {
+      try {
+        const res = await fetch(FIREBASE_DB_URL);
+        const data = await res.json();
+        if (!data) return;
+
+        const container = document.getElementById('tributesContainer');
+        const defaultPost = container.firstElementChild;
+        container.innerHTML = '';
+        if (defaultPost) container.appendChild(defaultPost);
+
+        Object.keys(data).forEach(id => {
+          const t = data[id];
+          const item = document.createElement('div');
+          item.className = 'tribute-item';
+          item.innerHTML = `
+            <div class="tribute-author">
+              <span class="tribute-name">${escapeHtml(t.author)} ${t.relation ? '(' + escapeHtml(t.relation) + ')' : ''}</span>
+              <span class="tribute-date">${escapeHtml(t.date || 'Cherished Memory')}</span>
+            </div>
+            <p class="tribute-message">"${escapeHtml(t.message)}"</p>
+          `;
+          container.prepend(item);
+        });
+      } catch (e) {
+        console.log("Database load notice:", e);
+      }
+    }
+
+    async function postCloudTribute(author, relation, message) {
+      const payload = {
+        author: author,
+        relation: relation,
+        message: message,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        timestamp: Date.now()
+      };
+
+      try {
+        await fetch(FIREBASE_DB_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        loadCloudTributes();
+      } catch (e) {
+        console.log("Cloud save notice:", e);
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+      });
+    }
+
+    // Call database on launch
+    loadCloudTributes();
+
+    // Tribute Submit Listener
+    document.getElementById('submitTributeBtn').addEventListener('click', () => {
+      const author = document.getElementById('tributeAuthor').value.trim() || 'A Loving Relative';
+      const relation = document.getElementById('tributeRelation').value.trim();
+      const msg = document.getElementById('tributeMessage').value.trim();
+
+      if (!msg) return;
+
+      postCloudTribute(author, relation, msg);
+
+      document.getElementById('tributeMessage').value = '';
+      document.getElementById('tributeAuthor').value = '';
+      document.getElementById('tributeRelation').value = '';
+    });
+
     // Build Waveform Sticks
     const waveform = document.getElementById('waveformContainer');
     for (let i = 0; i < 28; i++) {
@@ -1222,7 +1331,7 @@
     });
 
     audio.addEventListener('timeupdate', () => {
-      if (!isNaN(audio.duration)) {
+      if (!isNaN(audio.duration) && audio.duration > 0) {
         scrubber.value = (audio.currentTime / audio.duration) * 100;
         curTimeTxt.textContent = fmtTime(audio.currentTime);
       }
@@ -1233,7 +1342,7 @@
     });
 
     scrubber.addEventListener('input', () => {
-      if (!isNaN(audio.duration)) {
+      if (!isNaN(audio.duration) && audio.duration > 0) {
         audio.currentTime = (scrubber.value / 100) * audio.duration;
       }
     });
@@ -1262,30 +1371,7 @@
     candle.addEventListener('click', igniteCandle);
     lightBtn.addEventListener('click', igniteCandle);
 
-    // Tribute Wall Submission
-    document.getElementById('submitTributeBtn').addEventListener('click', () => {
-      const author = document.getElementById('tributeAuthor').value.trim() || 'A Loving Relative';
-      const relation = document.getElementById('tributeRelation').value.trim();
-      const msg = document.getElementById('tributeMessage').value.trim();
-
-      if (!msg) return;
-
-      const container = document.getElementById('tributesContainer');
-      const item = document.createElement('div');
-      item.className = 'tribute-item';
-      item.innerHTML = `
-        <div class="tribute-author">
-          <span class="tribute-name">${author} ${relation ? '(' + relation + ')' : ''}</span>
-          <span class="tribute-date">Just now</span>
-        </div>
-        <p class="tribute-message">"${msg}"</p>
-      `;
-      container.prepend(item);
-
-      document.getElementById('tributeMessage').value = '';
-    });
-
-    // Sacred Hymn Chords
+    // Sacred Hymn (Web Audio API)
     let audioCtx = null;
     let hymnPlaying = false;
     let hymnTimer = null;
@@ -1296,7 +1382,7 @@
       const btnText = document.getElementById('hymnBtnText');
       if (!hymnPlaying) {
         hymnPlaying = true;
-        btnText.textContent = 'Pause Hymn';
+        btnText.textContent = 'Pause';
         playSacredChord();
         hymnTimer = setInterval(playSacredChord, 4000);
       } else {
@@ -1321,8 +1407,8 @@
         osc.type = 'sine';
         osc.frequency.value = freq;
         gain.gain.setValueAtTime(0, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 1.2);
-        gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 3.8);
+        gain.gain.linearRampToValueAtTime(0.035, audioCtx.currentTime + 1.2);
+        gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 3.8);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
@@ -1330,17 +1416,19 @@
       });
     }
 
-    // QR Modal
+    // QR Modal & Save Logic
     const qrModal = document.getElementById('qrModal');
     let qrGenerated = false;
 
     document.getElementById('openQrBtn').addEventListener('click', () => {
       qrModal.classList.add('active');
       if (!qrGenerated) {
-        new QRCode(document.getElementById('qrcode-display'), {
+        const qrContainer = document.getElementById('qrcode-display');
+        qrContainer.innerHTML = '';
+        new QRCode(qrContainer, {
           text: window.location.href,
-          width: 170,
-          height: 170,
+          width: 180,
+          height: 180,
           colorDark: "#4A121A",
           colorLight: "#FFFFFF",
           correctLevel: QRCode.CorrectLevel.H
@@ -1353,15 +1441,31 @@
       qrModal.classList.remove('active');
     });
 
+    // Reliable Direct QR Image Download
     document.getElementById('saveQrImgBtn').addEventListener('click', () => {
-      const img = document.querySelector('#qrcode-display img');
-      if (img && img.src) {
-        const a = document.createElement('a');
-        a.href = img.src;
-        a.download = 'Memento-Keepsake-QR.png';
-        a.click();
+      const qrContainer = document.getElementById('qrcode-display');
+      const canvas = qrContainer.querySelector('canvas');
+      const img = qrContainer.querySelector('img');
+
+      if (canvas) {
+        const dataUrl = canvas.toDataURL('image/png');
+        triggerDownload(dataUrl);
+      } else if (img && img.src) {
+        triggerDownload(img.src);
+      } else {
+        const apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=' + encodeURIComponent(window.location.href) + '&color=4A121A&bgcolor=FFFFFF&qzone=2&format=png';
+        window.open(apiUrl, '_blank');
       }
     });
+
+    function triggerDownload(url) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Memento-Keepsake-QR.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
   </script>
 </body>
 </html>
