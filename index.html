@@ -1,1433 +1,1322 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>In Loving Memory & Eternal Peace</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Cormorant Garamond, Cinzel, and Inter -->
+  <title>In Loving Memory | Jayamma & Nana</title>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
   <!-- QRCode.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            parchment: '#FAF6EE',
-            parchmentDark: '#F3EBDD',
-            holyGold: '#C5A059',
-            holyGoldLight: '#E8D5A7',
-            deepBurgundy: '#4A121A',
-            royalNavy: '#162238',
-            softCharcoal: '#2D2D2D'
-          },
-          fontFamily: {
-            serif: ['Cormorant Garamond', 'serif'],
-            cinzel: ['Cinzel', 'serif'],
-            sans: ['Inter', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
-    /* Subtle parchment texture and atmospheric glow */
+    :root {
+      --primary: #4A121A;
+      --primary-dark: #2F070E;
+      --primary-light: #6E222E;
+      --gold: #C5A059;
+      --gold-light: #E7D39F;
+      --gold-dark: #8F6B2E;
+      --cream: #FAF7F0;
+      --cream-dark: #F3EBDD;
+      --parchment: #EFE6D5;
+      --text-dark: #2A2521;
+      --text-muted: #6B625B;
+      --white: #FFFFFF;
+      --shadow-sm: 0 4px 12px rgba(42, 37, 33, 0.06);
+      --shadow-md: 0 10px 30px rgba(42, 37, 33, 0.1);
+      --shadow-lg: 0 20px 45px rgba(42, 37, 33, 0.15);
+      --font-serif: 'Cinzel', serif;
+      --font-body: 'Cormorant Garamond', serif;
+      --font-sans: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #FAF6EE;
-      color: #2D2D2D;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      font-size: 19px;
+      line-height: 1.6;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.15), transparent 45%),
-        radial-gradient(circle at 10% 50%, rgba(74, 18, 26, 0.04), transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(22, 34, 56, 0.04), transparent 40%);
-      background-attachment: fixed;
+        radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(74, 18, 26, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(74, 18, 26, 0.05) 0%, transparent 50%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Candle flame flicker animation */
-    @keyframes flicker {
-      0%, 100% { transform: scale(1) rotate(-1deg); opacity: 0.95; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.8)); }
-      25% { transform: scale(1.06, 0.96) rotate(1.5deg); opacity: 1; filter: drop-shadow(0 0 16px rgba(245, 158, 11, 1)); }
-      50% { transform: scale(0.95, 1.05) rotate(-1deg); opacity: 0.85; filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.7)); }
-      75% { transform: scale(1.02, 1.02) rotate(0.8deg); opacity: 0.98; filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.9)); }
-    }
-    .flame-glow {
-      animation: flicker 1.8s infinite ease-in-out alternate;
-      transform-origin: bottom center;
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    /* Candle ignite animation */
-    @keyframes ignite {
-      0% { transform: scale(0); opacity: 0; filter: drop-shadow(0 0 0 rgba(245, 158, 11, 0)); }
-      50% { transform: scale(1.35) translateY(-5px); opacity: 1; filter: drop-shadow(0 0 24px rgba(251, 191, 36, 1)); }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
-    }
-    .igniting {
-      animation: ignite 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-
-    /* Waveform visualizer bars */
-    @keyframes wavePulse {
-      0%, 100% { height: 12%; }
-      50% { height: 85%; }
-    }
-    .wave-bar.active {
-      animation: wavePulse 1.2s infinite ease-in-out;
+    /* TOP BAR */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(197, 160, 89, 0.35);
+      position: sticky;
+      top: 0;
+      background: rgba(250, 247, 240, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      transition: all 0.3s ease;
     }
 
-    /* Custom gold scrollbars */
-    ::-webkit-scrollbar {
-      width: 7px;
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    ::-webkit-scrollbar-track {
-      background: #F3EBDD;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--primary);
     }
-    ::-webkit-scrollbar-thumb {
-      background: #C5A059;
-      border-radius: 9999px;
+
+    .cross-icon {
+      font-size: 24px;
+      color: var(--gold);
+      font-family: var(--font-serif);
+      filter: drop-shadow(0 2px 4px rgba(143, 107, 46, 0.3));
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 9px 18px;
+      border-radius: 30px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--gold);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: var(--primary-dark);
+      border-color: var(--gold);
+      box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(143, 107, 46, 0.4);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 48px 0 32px;
+      position: relative;
+    }
+
+    .sacred-cross-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      border: 1px solid var(--gold);
+      color: var(--gold-dark);
+      font-size: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .ornament-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 16px auto 24px;
+      max-width: 320px;
+      color: var(--gold);
+    }
+
+    .ornament-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .scripture-box {
+      max-width: 650px;
+      margin: 0 auto 36px;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      border-left: 3px solid var(--gold);
+      border-right: 3px solid var(--gold);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .scripture-quote {
+      font-style: italic;
+      color: var(--text-dark);
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .scripture-ref {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* GRANDPARENTS SHOWCASE */
+    .couples-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .tribute-card {
+      background: var(--white);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tribute-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+    }
+
+    .portrait-frame {
+      width: 170px;
+      height: 230px;
+      border-radius: 110px 110px 16px 16px;
+      margin: 0 auto 20px;
+      padding: 6px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      box-shadow: 0 8px 24px rgba(143, 107, 46, 0.25);
+      position: relative;
+    }
+
+    .portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 106px 106px 12px 12px;
+      background-color: var(--cream-dark);
+      display: block;
+    }
+
+    .person-role {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .person-name {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .person-dates {
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    .person-quote {
+      font-size: 17px;
+      color: var(--text-dark);
+      margin-bottom: 22px;
+      flex-grow: 1;
+      padding: 0 10px;
+    }
+
+    /* MEDIA SECTION TOGGLES */
+    .media-mode-selector {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .mode-tab {
+      padding: 10px 22px;
+      border-radius: 30px;
+      background: var(--cream-dark);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .mode-tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary-dark);
+      box-shadow: 0 4px 15px rgba(74, 18, 26, 0.25);
+    }
+
+    /* MEDIA PLAYERS CONTAINER */
+    .media-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .media-card {
+      background: var(--white);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .media-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--cream-dark);
+      padding-bottom: 14px;
+    }
+
+    .media-icon-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(197, 160, 89, 0.15);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .media-title-group h3 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .media-title-group p {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-dark);
+    }
+
+    /* AUDIO PLAYER STYLES */
+    .audio-player-box {
+      background: var(--cream);
+      border: 1px solid var(--gold-light);
+      border-radius: 16px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .audio-waveform-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 38px;
+      gap: 4px;
+      padding: 0 10px;
+    }
+
+    .wave-stick {
+      flex: 1;
+      background: var(--gold-light);
+      border-radius: 4px;
+      height: 20%;
+      transition: height 0.15s ease, background-color 0.2s ease;
+    }
+
+    .wave-stick.active {
+      background: var(--primary);
+      height: 80%;
+      animation: pulseWave 1s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulseWave {
+      0% { height: 25%; }
+      100% { height: 95%; }
+    }
+
+    .audio-controls-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .play-btn {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(74, 18, 26, 0.3);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover {
+      background: var(--primary-light);
+      transform: scale(1.05);
+    }
+
+    .scrub-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .scrub-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--cream-dark);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .scrub-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .audio-time-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* VIDEO PLAYER STYLES */
+    .video-container {
+      position: relative;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16/9;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .video-element {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-overlay-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(74, 18, 26, 0.85);
+      border: 2px solid var(--gold);
+      color: white;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .video-overlay-btn:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: var(--primary);
+    }
+
+    /* CANDLE & VIGIL SECTION */
+    .candle-section {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(243, 235, 221, 0.8));
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 24px;
+      padding: 40px 24px;
+      text-align: center;
+      margin-bottom: 50px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .candle-container {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0 24px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .candle-aura {
+      position: relative;
+      width: 130px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .glow-light {
+      position: absolute;
+      top: 15px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 215, 120, 0.8) 0%, rgba(255, 140, 0, 0.25) 50%, transparent 75%);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+
+    .candle-container.lit .glow-light {
+      opacity: 1;
+      animation: ambientGlow 2.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes ambientGlow {
+      0% { transform: scale(0.95); opacity: 0.75; }
+      100% { transform: scale(1.1); opacity: 0.95; }
+    }
+
+    .candle-flame {
+      width: 16px;
+      height: 38px;
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      background: linear-gradient(to bottom, #FFFFFF 0%, #FFDF73 30%, #FF8A00 70%, #D83A00 100%);
+      position: absolute;
+      bottom: 60px;
+      opacity: 0;
+      transform-origin: center bottom;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.9));
+    }
+
+    .candle-container.lit .candle-flame {
+      opacity: 1;
+      animation: flickerFlame 1.2s infinite ease-in-out;
+    }
+
+    @keyframes flickerFlame {
+      0% { transform: rotate(-1.5deg) scale(1); }
+      25% { transform: rotate(1.5deg) scale(1.04); }
+      50% { transform: rotate(-0.5deg) scale(0.98); }
+      75% { transform: rotate(1deg) scale(1.03); }
+      100% { transform: rotate(-1.5deg) scale(1); }
+    }
+
+    .candle-wick {
+      width: 3px;
+      height: 12px;
+      background: #443;
+      border-radius: 2px;
+      position: absolute;
+      bottom: 50px;
+      z-index: 2;
+    }
+
+    .candle-container.lit .candle-wick {
+      background: #933;
+      box-shadow: 0 0 4px #ff6600;
+    }
+
+    .candle-wax {
+      width: 58px;
+      height: 54px;
+      background: linear-gradient(180deg, #FDF9EE 0%, #E6DAC4 100%);
+      border-radius: 8px 8px 12px 12px;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 10px rgba(0,0,0,0.15);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      position: relative;
+    }
+
+    .candle-wax::after {
+      content: '✝';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(143, 107, 46, 0.4);
+      font-size: 16px;
+    }
+
+    .candle-counter-text {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    /* MEMORY / CONDOLENCE WALL */
+    .wall-section {
+      margin-bottom: 60px;
+    }
+
+    .section-header-center {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-header-center h3 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      color: var(--primary);
+    }
+
+    .tribute-submission {
+      background: var(--white);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .input-field, .textarea-field {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      background: var(--cream);
+      font-family: var(--font-body);
+      font-size: 18px;
+      color: var(--text-dark);
+      outline: none;
+    }
+
+    .input-field:focus, .textarea-field:focus {
+      border-color: var(--gold-dark);
+      background: var(--white);
+    }
+
+    .textarea-field {
+      height: 90px;
+      resize: vertical;
+      margin-bottom: 16px;
+    }
+
+    .tributes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tribute-item {
+      background: var(--white);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tribute-author {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .tribute-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    .tribute-date {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .tribute-message {
+      font-style: italic;
+      color: var(--text-dark);
+      font-size: 18px;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: auto;
+      border-top: 1px solid rgba(197, 160, 89, 0.35);
+      background: var(--cream-dark);
+      padding: 36px 0;
+      text-align: center;
+    }
+
+    .footer-cross {
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .footer-note {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .footer-scripture {
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    /* QR MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 10, 12, 0.7);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--cream);
+      border: 1px solid var(--gold);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 480px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .qr-card-preview {
+      background: white;
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .qr-badge-title {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+
+    #qrcode-display {
+      margin-bottom: 14px;
+      padding: 10px;
+      background: white;
+    }
+
+    .qr-badge-sub {
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .couples-grid, .media-stage {
+        grid-template-columns: 1fr;
+      }
+      .input-row {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 30px;
+      }
+      .portrait-frame {
+        width: 150px;
+        height: 200px;
+      }
     }
   </style>
 </head>
-<body class="font-sans antialiased selection:bg-holyGoldLight selection:text-deepBurgundy">
+<body>
 
-  <!-- Top Ambient Banner & Sound Control -->
-  <header class="border-b border-[#E3D7BF] bg-[#F7F1E5]/80 backdrop-blur sticky top-0 z-40 px-4 py-2.5 transition-all">
-    <div class="max-w-4xl mx-auto flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <svg class="w-4 h-4 text-holyGold" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11 2h2v7h7v2h-7v11h-2V11H4V9h7V2z"/>
-        </svg>
-        <span class="font-cinzel text-xs tracking-widest text-[#6E5833] uppercase font-semibold">Memento Keepsake Tribute</span>
-      </div>
-      
-      <div class="flex items-center space-x-3">
-        <!-- Ambient Music Button -->
-        <button id="ambientMusicBtn" onclick="toggleAmbientMusic()" class="flex items-center space-x-1.5 text-xs text-softCharcoal hover:text-deepBurgundy bg-white/70 hover:bg-white border border-[#DAC49E] px-2.5 py-1 rounded-full shadow-sm transition">
-          <span id="ambientIcon">🕊️</span>
-          <span id="ambientLabel" class="hidden sm:inline font-serif italic text-sm">Hymn Tone</span>
+  <!-- TOP BAR -->
+  <header>
+    <div class="container header-content">
+      <a href="#" class="brand">
+        <span class="cross-icon">✝</span>
+        <span class="brand-title">Memento Keepsake</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn btn-outline" id="hymnToggleBtn">
+          <span>🕊️</span> <span id="hymnBtnText">Hymn</span>
         </button>
-
-        <!-- Edit Memorial Switch -->
-        <button onclick="toggleEditModal()" class="flex items-center space-x-1 text-xs font-medium text-holyGold hover:text-deepBurgundy bg-white border border-holyGold px-3 py-1 rounded-full shadow-sm hover:shadow transition">
-          <span>✏️</span>
-          <span class="font-sans text-xs">Edit Memorial</span>
-        </button>
-
-        <!-- QR Code Print Modal -->
-        <button onclick="openQrModal()" class="flex items-center space-x-1 text-xs text-[#523e1b] hover:text-black bg-[#F3E6C8] hover:bg-[#EBD8B2] px-3 py-1 rounded-full font-semibold shadow-sm transition" title="Printable QR Code">
-          <span>📱</span>
-          <span class="font-sans text-xs">Memento QR Card</span>
+        <button class="btn btn-gold" id="openQrBtn">
+          <span>📱</span> Memento QR
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <main class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
-    
-    <!-- Holy Cross Motif -->
-    <div class="text-center mb-4">
-      <div class="inline-flex items-center justify-center p-3 rounded-full bg-[#EFE5D2] border border-[#DFCFA8] shadow-inner mb-3">
-        <svg class="w-8 h-8 text-holyGold" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11 2h2v7h7v2h-7v11h-2V11H4V9h7V2z"/>
-        </svg>
-      </div>
-      <p class="font-cinzel tracking-[0.25em] text-xs uppercase text-holyGold font-semibold mb-1" id="dispHeaderSub">In Blessed Memory & Everlasting Grace</p>
-      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-deepBurgundy mb-3 tracking-wide" id="dispMemorialTitle">Reunited in Heaven</h1>
-      <div class="w-24 h-[1px] bg-holyGold mx-auto my-3 relative">
-        <span class="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-parchment px-2 text-holyGold text-xs">✝</span>
-      </div>
-      <p class="font-serif italic text-base sm:text-lg text-softCharcoal max-w-xl mx-auto px-2" id="dispPrimaryScripture">
-        "I have fought the good fight, I have finished the race, I have kept the faith. Now there is in store for me the crown of righteousness."
-      </p>
-      <p class="text-xs uppercase tracking-widest text-[#846E4A] font-semibold mt-1" id="dispScriptureRef">— 2 Timothy 4:7-8</p>
-    </div>
-
-    <!-- Portrait Arch Displays (Nani & Nana) -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-8">
+  <main class="container">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="sacred-cross-badge">✝</div>
+      <div class="hero-subtitle">In Blessed Memory & Everlasting Grace</div>
+      <h1 class="hero-title">Reunited in Heaven</h1>
       
-      <!-- Nani Card -->
-      <div class="bg-[#FFFDF9] border border-[#E5DAC0] rounded-2xl p-6 shadow-sm flex flex-col items-center text-center relative overflow-hidden group hover:border-holyGold transition">
-        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-holyGold to-transparent"></div>
-        <div class="w-36 h-48 rounded-t-full rounded-b-2xl border-4 border-holyGoldLight p-1 shadow-md mb-4 bg-parchmentDark flex items-center justify-center overflow-hidden">
-          <img id="dispNaniPhoto" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" alt="Nani Portrait" class="w-full h-full object-cover rounded-t-full rounded-b-xl" onerror="this.src='https://placehold.co/400x500/E8D5A7/4A121A?text=Nani+Portrait'">
-        </div>
-        <span class="text-xs uppercase font-cinzel tracking-wider text-holyGold font-bold mb-1">Our Beloved Grandmother</span>
-        <h2 class="font-serif text-2xl font-bold text-softCharcoal" id="dispNaniName">Grace "Nani" Evelyn</h2>
-        <p class="font-serif italic text-xs text-[#7A6B53] mb-3" id="dispNaniDates">April 14, 1941 – November 22, 2024</p>
-        <p class="text-xs text-softCharcoal/80 font-serif leading-relaxed line-clamp-3 mb-4" id="dispNaniEpitaph">
-          "A woman of deep prayer, tender hugs, warm kitchen stories, and unwavering devotion to her family and faith."
-        </p>
-        <button onclick="scrollToMedia('naniMediaSection')" class="mt-auto inline-flex items-center space-x-2 text-xs font-semibold px-4 py-2 rounded-full bg-parchment hover:bg-[#EFE5D2] text-deepBurgundy border border-[#DFCFA8] transition w-full justify-center">
-          <span>🕊️</span>
-          <span>Listen to Nani's Voice</span>
-        </button>
+      <div class="ornament-divider">
+        <div class="ornament-line"></div>
+        <span>✤</span>
+        <div class="ornament-line"></div>
       </div>
 
-      <!-- Nana Card -->
-      <div class="bg-[#FFFDF9] border border-[#E5DAC0] rounded-2xl p-6 shadow-sm flex flex-col items-center text-center relative overflow-hidden group hover:border-holyGold transition">
-        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-royalNavy to-transparent"></div>
-        <div class="w-36 h-48 rounded-t-full rounded-b-2xl border-4 border-holyGoldLight p-1 shadow-md mb-4 bg-parchmentDark flex items-center justify-center overflow-hidden">
-          <img id="dispNanaPhoto" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80" alt="Nana Portrait" class="w-full h-full object-cover rounded-t-full rounded-b-xl" onerror="this.src='https://placehold.co/400x500/E8D5A7/162238?text=Nana+Portrait'">
-        </div>
-        <span class="text-xs uppercase font-cinzel tracking-wider text-holyGold font-bold mb-1">Our Beloved Grandfather</span>
-        <h2 class="font-serif text-2xl font-bold text-softCharcoal" id="dispNanaName">Arthur "Nana" Joseph</h2>
-        <p class="font-serif italic text-xs text-[#7A6B53] mb-3" id="dispNanaDates">August 28, 1937 – January 15, 2025</p>
-        <p class="text-xs text-softCharcoal/80 font-serif leading-relaxed line-clamp-3 mb-4" id="dispNanaEpitaph">
-          "A gentle soul whose joyous laughter, wise counsel, and steadfast integrity illuminated all our lives."
-        </p>
-        <button onclick="scrollToMedia('nanaMediaSection')" class="mt-auto inline-flex items-center space-x-2 text-xs font-semibold px-4 py-2 rounded-full bg-parchment hover:bg-[#EFE5D2] text-royalNavy border border-[#DFCFA8] transition w-full justify-center">
-          <span>🎥</span>
-          <span>Watch Nana's Last Video</span>
-        </button>
+      <div class="scripture-box">
+        <p class="scripture-quote">"I have fought the good fight, I have finished the race, I have kept the faith. Now there is in store for me the crown of righteousness."</p>
+        <div class="scripture-ref">— 2 Timothy 4:7-8</div>
       </div>
-
     </section>
 
-    <!-- Quick Navigation Pill selector -->
-    <div class="flex flex-wrap items-center justify-center gap-2 my-6">
-      <button onclick="setMemorialTab('both')" id="tabBtnBoth" class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-cinzel font-semibold transition bg-deepBurgundy text-white shadow-md flex items-center space-x-2">
-        <span>✨</span>
-        <span>Cherish Both Together</span>
+    <!-- GRANDPARENTS BIOGRAPHY CARDS -->
+    <section class="couples-grid">
+      <!-- Nani Jayamma -->
+      <div class="tribute-card">
+        <div class="portrait-frame">
+          <img src="nani.png" alt="Jayamma" class="portrait-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80';">
+        </div>
+        <div class="person-role">Our Beloved Grandmother</div>
+        <h2 class="person-name">Jayamma</h2>
+        <div class="person-dates">November 29, 1950 – May 01, 2018</div>
+        <p class="person-quote">"A cherished matriarch whose prayers guarded our family, whose heart radiated Christian grace, and whose warmth remains alive in our memories."</p>
+        <button class="btn btn-outline" onclick="selectMediaView('audio')">
+          <span>🕊️</span> Listen to Her Voice
+        </button>
+      </div>
+
+      <!-- Nana -->
+      <div class="tribute-card">
+        <div class="portrait-frame">
+          <img src="nana.png" alt="Beloved Grandfather" class="portrait-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80';">
+        </div>
+        <div class="person-role">Our Beloved Grandfather</div>
+        <h2 class="person-name">Nana</h2>
+        <div class="person-dates">In God's Eternal Keeping</div>
+        <p class="person-quote">"A pillar of strength, humble integrity, and Christian love whose kindness and guidance shaped generations."</p>
+        <button class="btn btn-outline" onclick="selectMediaView('video')">
+          <span>🎬</span> Watch His Video
+        </button>
+      </div>
+    </section>
+
+    <!-- MEDIA SELECTOR -->
+    <div class="media-mode-selector">
+      <button class="mode-tab active" data-mode="both" onclick="selectMediaView('both')">
+        <span>✝</span> Cherish Both Together
       </button>
-      <button onclick="setMemorialTab('nani')" id="tabBtnNani" class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-cinzel font-semibold transition bg-white text-softCharcoal border border-[#E0D3BC] hover:border-holyGold flex items-center space-x-2">
-        <span>🕊️</span>
-        <span>Nani's Voice</span>
+      <button class="mode-tab" data-mode="audio" onclick="selectMediaView('audio')">
+        <span>🕊️</span> Nani's Voice
       </button>
-      <button onclick="setMemorialTab('nana')" id="tabBtnNana" class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-cinzel font-semibold transition bg-white text-softCharcoal border border-[#E0D3BC] hover:border-holyGold flex items-center space-x-2">
-        <span>🎥</span>
-        <span>Nana's Video</span>
+      <button class="mode-tab" data-mode="video" onclick="selectMediaView('video')">
+        <span>🎬</span> Nana's Video
       </button>
     </div>
 
-    <!-- MEDIA SECTIONS WRAPPER -->
-    <div class="space-y-8 my-6">
-
-      <!-- NANI'S AUDIO PLAYER CONTAINER -->
-      <div id="naniMediaSection" class="bg-[#FFFDF9] border border-[#E5DAC0] rounded-2xl p-5 sm:p-7 shadow-sm transition">
-        <div class="flex items-center justify-between border-b border-[#EFE5D2] pb-4 mb-4">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-full bg-[#FAF3E3] border border-holyGold flex items-center justify-center text-lg">
-              🕊️
-            </div>
-            <div>
-              <h3 class="font-serif font-bold text-lg text-deepBurgundy" id="dispNaniAudioTitle">Nani's Voice & Blessing</h3>
-              <p class="text-xs text-[#8A7960] font-serif italic" id="dispNaniAudioSub">Recorded with love for her grandchildren</p>
-            </div>
+    <!-- MEDIA PLAYERS -->
+    <section class="media-stage">
+      <!-- Voice Player (Jayamma) -->
+      <div class="media-card" id="audioSectionCard">
+        <div class="media-card-header">
+          <div class="media-icon-badge">🕊️</div>
+          <div class="media-title-group">
+            <h3>Jayamma's Blessing</h3>
+            <p>Voice Recording & Prayer</p>
           </div>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-parchmentDark text-holyGold font-cinzel font-semibold">Audio Memoir</span>
         </div>
 
-        <!-- Custom Audio Player Deck -->
-        <div class="bg-[#FAF6EE] border border-[#E8DCC2] rounded-xl p-4 sm:p-5">
-          <!-- Waveform Visualizer simulation -->
-          <div class="flex items-center justify-center space-x-1 sm:space-x-1.5 h-16 bg-[#F4EEDB] rounded-lg px-4 mb-4" id="audioWaveformBox">
-            <!-- 32 waveform visualizer bars -->
-            <div class="wave-bar w-1.5 bg-holyGold/70 rounded-full h-3"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/70 rounded-full h-6"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/80 rounded-full h-10"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/90 rounded-full h-4"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-8"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-12"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/80 rounded-full h-6"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/90 rounded-full h-10"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-14"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-7"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/80 rounded-full h-11"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-15"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/70 rounded-full h-9"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-5"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/90 rounded-full h-12"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-14"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/70 rounded-full h-6"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/90 rounded-full h-10"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-15"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-8"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/80 rounded-full h-11"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/90 rounded-full h-5"></div>
-            <div class="wave-bar w-1.5 bg-holyGold rounded-full h-9"></div>
-            <div class="wave-bar w-1.5 bg-holyGold/70 rounded-full h-4"></div>
+        <div class="audio-player-box">
+          <div class="audio-waveform-bar" id="waveformContainer">
+            <!-- 28 animated wave sticks -->
           </div>
 
-          <!-- Progress scrubber -->
-          <div class="space-y-1">
-            <input type="range" id="audioScrubber" value="0" min="0" max="100" class="w-full h-1.5 bg-[#DAC8A8] rounded-lg appearance-none cursor-pointer accent-deepBurgundy">
-            <div class="flex justify-between text-[11px] text-[#7A6B53] font-mono">
-              <span id="audioCurrentTime">0:00</span>
-              <span id="audioDuration">1:12</span>
-            </div>
-          </div>
-
-          <!-- Player Controls -->
-          <div class="flex items-center justify-between mt-3">
-            <div class="flex items-center space-x-3">
-              <!-- Rewind 10s -->
-              <button onclick="skipAudio(-10)" class="text-softCharcoal hover:text-deepBurgundy text-sm p-1.5 rounded-full hover:bg-parchmentDark transition" title="Rewind 10s">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.334 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"/></svg>
-              </button>
-
-              <!-- Main Play/Pause Button -->
-              <button id="audioPlayBtn" onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-deepBurgundy hover:bg-[#380D13] text-holyGoldLight flex items-center justify-center shadow-md hover:scale-105 transition transform">
-                <svg id="playIconSvg" class="w-5 h-5 ml-0.5 fill-current" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </button>
-
-              <!-- Forward 10s -->
-              <button onclick="skipAudio(10)" class="text-softCharcoal hover:text-deepBurgundy text-sm p-1.5 rounded-full hover:bg-parchmentDark transition" title="Forward 10s">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.934 12.8a1 1 0 000-1.6l-5.334-4A1 1 0 005 8v8a1 1 0 001.6.8l5.334-4zM19.934 12.8a1 1 0 000-1.6l-5.334-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.334-4z"/></svg>
-              </button>
-            </div>
-
-            <div class="flex items-center space-x-2">
-              <span class="text-xs text-[#8A7960]">🔊</span>
-              <input type="range" id="audioVolume" min="0" max="1" step="0.05" value="0.8" class="w-16 sm:w-24 h-1.5 bg-[#DAC8A8] rounded-lg appearance-none cursor-pointer accent-holyGold" oninput="changeAudioVolume(this.value)">
-            </div>
-          </div>
-
-          <!-- Hidden Native Audio Source -->
-          <audio id="naniAudioElement" preload="metadata"></audio>
-        </div>
-
-      </div>
-
-      <!-- NANA'S VIDEO PLAYER CONTAINER -->
-      <div id="nanaMediaSection" class="bg-[#FFFDF9] border border-[#E5DAC0] rounded-2xl p-5 sm:p-7 shadow-sm transition">
-        <div class="flex items-center justify-between border-b border-[#EFE5D2] pb-4 mb-4">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-full bg-[#EEF2F9] border border-royalNavy/40 flex items-center justify-center text-lg">
-              🎥
-            </div>
-            <div>
-              <h3 class="font-serif font-bold text-lg text-royalNavy" id="dispNanaVideoTitle">Nana's Final Words & Smiles</h3>
-              <p class="text-xs text-[#8A7960] font-serif italic" id="dispNanaVideoSub">His laughter, wisdom, and warm greeting</p>
-            </div>
-          </div>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-[#E5ECF6] text-royalNavy font-cinzel font-semibold">Video Keepsake</span>
-        </div>
-
-        <!-- Video Player Deck -->
-        <div class="relative bg-black rounded-xl overflow-hidden shadow-lg aspect-video max-h-[480px] flex items-center justify-center group" id="videoWrapper">
-          
-          <!-- Direct HTML5 Video Player -->
-          <video id="nanaVideoPlayer" class="w-full h-full object-cover" poster="https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=1200&q=80" playsinline>
-            <source id="nanaVideoSource" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-
-          <!-- Custom Overlay Controls on Video -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4 pointer-events-none">
-            <div class="flex justify-between items-center text-white text-xs">
-              <span class="bg-black/40 px-2 py-0.5 rounded font-cinzel">Memento Video Memory</span>
-              <button onclick="toggleVideoFullscreen()" class="pointer-events-auto p-1.5 hover:text-holyGold">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
-              </button>
-            </div>
-
-            <div class="pointer-events-auto space-y-2">
-              <input type="range" id="videoScrubber" value="0" min="0" max="100" class="w-full h-1 bg-white/40 rounded appearance-none cursor-pointer accent-holyGold">
-              <div class="flex items-center justify-between text-white text-xs">
-                <div class="flex items-center space-x-3">
-                  <button id="videoPlayOverlayBtn" onclick="toggleNanaVideo()" class="hover:text-holyGold">
-                    <svg id="videoPlayIcon" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                  </button>
-                  <span id="videoTimeDisplay" class="font-mono text-[11px]">0:00 / 0:00</span>
-                </div>
-                <button onclick="toggleVideoMute()" id="videoMuteBtn" class="hover:text-holyGold">🔊</button>
+          <div class="audio-controls-row">
+            <button class="play-btn" id="voicePlayBtn">▶</button>
+            <div class="scrub-container">
+              <input type="range" class="scrub-slider" id="audioScrubber" value="0" min="0" max="100" step="0.1">
+              <div class="audio-time-row">
+                <span id="audioCurrentTime">0:00</span>
+                <span id="audioDuration">Loading...</span>
               </div>
             </div>
           </div>
-
-          <!-- Big Play Button when paused -->
-          <button id="centerVideoPlayBtn" onclick="toggleNanaVideo()" class="absolute w-16 h-16 rounded-full bg-royalNavy/80 hover:bg-royalNavy text-white flex items-center justify-center border-2 border-holyGoldLight shadow-2xl transition transform hover:scale-110">
-            <svg class="w-7 h-7 ml-1 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </button>
         </div>
 
-        <!-- Video Note -->
-        <div class="mt-4 p-4 rounded-xl bg-parchment/60 border border-[#EAE0CD]">
-          <h4 class="text-xs uppercase tracking-wider font-cinzel text-holyGold font-bold mb-1.5">About This Moment</h4>
-          <p class="font-serif italic text-softCharcoal text-sm leading-relaxed" id="dispNanaNotes">
-            "Nana on his favorite wooden armchair, holding his bible, sharing stories of his early days with Nani and blessing each of his grandchildren by name."
-          </p>
-        </div>
+        <audio id="naniAudioElement" src="nani-voice.mp3" preload="metadata"></audio>
       </div>
 
-    </div>
-
-    <!-- VIRTUAL CANDLE LIGHTING (PRAYER VIGIL) -->
-    <section class="bg-gradient-to-b from-[#FFFDF9] to-[#FBF5E8] border border-[#E5DAC0] rounded-2xl p-6 sm:p-8 shadow-sm my-10 text-center relative overflow-hidden">
-      <div class="max-w-md mx-auto">
-        <h3 class="font-serif text-2xl font-bold text-deepBurgundy mb-1">Light a Memorial Candle</h3>
-        <p class="text-xs text-[#7A6B53] font-serif italic mb-6">
-          "The light shines in the darkness, and the darkness has not overcome it." — John 1:5
-        </p>
-
-        <!-- Candle Graphic (Clickable to light) -->
-        <div onclick="lightCandle()" class="relative w-32 h-44 mx-auto flex flex-col items-center justify-end mb-4 cursor-pointer select-none group" title="Click to light the candle">
-          
-          <!-- Warm Radial Aura (Appears when lit) -->
-          <div id="candleAura" class="absolute top-2 w-28 h-28 rounded-full bg-amber-400/20 blur-xl opacity-0 transition-opacity duration-1000 pointer-events-none"></div>
-
-          <!-- Flame (starts hidden/off) -->
-          <div id="candleFlame" class="mb-1 w-6 h-10 rounded-full bg-gradient-to-t from-amber-600 via-amber-400 to-yellow-100 flex items-center justify-center opacity-0 scale-0 origin-bottom transition-all duration-500">
-            <div class="w-2 h-4 rounded-full bg-white/85 blur-[0.8px]"></div>
+      <!-- Video Player (Nana) -->
+      <div class="media-card" id="videoSectionCard">
+        <div class="media-card-header">
+          <div class="media-icon-badge">🎬</div>
+          <div class="media-title-group">
+            <h3>Nana's Remembrance</h3>
+            <p>Cherished Video</p>
           </div>
-
-          <!-- Wick (With glowing tip indicator when lit) -->
-          <div class="w-1 h-3.5 bg-neutral-800 rounded-t relative flex items-start justify-center">
-            <div id="wickEmber" class="w-1.5 h-1.5 rounded-full bg-amber-500/0 blur-[1px] -mt-0.5 transition-colors duration-500"></div>
-          </div>
-
-          <!-- Wax Candle Pillar -->
-          <div class="w-16 h-24 bg-gradient-to-r from-[#EDE2CD] via-[#FAF4E6] to-[#DCCEB2] rounded-t-md shadow-md border-t border-[#DFD1B5] relative group-hover:brightness-105 transition">
-            <div class="absolute top-2 inset-x-2 h-1 bg-white/40 rounded-full"></div>
-            <div class="text-[10px] font-cinzel text-holyGold/80 text-center pt-8">✝ IN PEACE</div>
-          </div>
-
-          <!-- Base Dish -->
-          <div class="w-24 h-3 bg-[#C5A059] rounded-full shadow border-t border-[#E8D5A7]"></div>
         </div>
 
-        <!-- Candle State Status text -->
-        <p id="candleStatusNote" class="text-xs font-serif italic text-holyGold mb-3">
-          (Click the candle or the button below to light it in their prayer)
-        </p>
-
-        <div class="mb-5">
-          <span class="text-xs font-cinzel tracking-wider text-[#8A7960] uppercase">Candles lit in their honor: </span>
-          <span id="candleCount" class="font-bold text-lg text-deepBurgundy font-serif">148</span>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-2 justify-center">
-          <input type="text" id="candlePrayerInput" placeholder="Your name or brief prayer intention..." class="px-4 py-2 text-xs rounded-full border border-[#D5C29D] bg-white focus:outline-none focus:border-holyGold text-softCharcoal">
-          <button id="lightCandleBtn" onclick="lightCandle()" class="px-5 py-2 rounded-full bg-holyGold hover:bg-[#B38E46] text-white font-cinzel font-semibold text-xs shadow hover:shadow-md transition">
-            🕯️ Light a Candle
-          </button>
+        <div class="video-container">
+          <video id="nanaVideoElement" class="video-element" playsinline controls preload="metadata">
+            <source src="nana-video.mp4" type="video/mp4">
+            Your browser does not support HTML video.
+          </video>
         </div>
       </div>
     </section>
 
-    <!-- FAMILY TRIBUTE / CONDOLENCE MESSAGES -->
-    <section class="bg-[#FFFDF9] border border-[#E5DAC0] rounded-2xl p-6 sm:p-8 shadow-sm my-10">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#EFE5D2] mb-6 gap-2">
-        <div>
-          <h3 class="font-serif text-2xl font-bold text-softCharcoal">Loving Memories & Blessings</h3>
-          <p class="text-xs text-[#8A7960] font-serif italic">Leave a prayer or shared memory for the family</p>
+    <!-- MEMORIAL CANDLE VIGIL -->
+    <section class="candle-section">
+      <div class="hero-subtitle">Sacred Remembrance</div>
+      <h2 style="font-family: var(--font-serif); color: var(--primary); margin-bottom: 8px;">Light a Candle in Loving Honor</h2>
+      <p style="font-size: 18px; color: var(--text-muted); max-width: 500px; margin: 0 auto 16px;">
+        Tap the candle to ignite a prayer flame in memory of Jayamma & Nana.
+      </p>
+
+      <div class="candle-container" id="memorialCandle">
+        <div class="candle-aura">
+          <div class="glow-light"></div>
+          <div class="candle-flame"></div>
+          <div class="candle-wick"></div>
+          <div class="candle-wax"></div>
         </div>
-        <button onclick="document.getElementById('condolenceName').focus()" class="self-start sm:self-auto text-xs font-semibold px-4 py-1.5 rounded-full bg-parchment border border-holyGold text-deepBurgundy hover:bg-[#EFE5D2] transition">
-          + Add A Memory
+      </div>
+
+      <div class="candle-counter-text">
+        <span id="candleCount">42</span> Candles Burning in Prayer
+      </div>
+
+      <div>
+        <button class="btn btn-gold" id="lightCandleBtn">
+          <span>🕯️</span> Light This Candle
+        </button>
+      </div>
+    </section>
+
+    <!-- MEMORY & PRAYER WALL -->
+    <section class="wall-section">
+      <div class="section-header-center">
+        <div class="hero-subtitle">Family & Friends</div>
+        <h3>Words of Faith & Remembrance</h3>
+      </div>
+
+      <div class="tribute-submission">
+        <div class="input-row">
+          <input type="text" id="tributeAuthor" class="input-field" placeholder="Your Name or Family">
+          <input type="text" id="tributeRelation" class="input-field" placeholder="Relationship (e.g. Grandson, Cousin)">
+        </div>
+        <textarea id="tributeMessage" class="textarea-field" placeholder="Share a prayer, comforting memory, or word of honor..."></textarea>
+        <button class="btn btn-gold" id="submitTributeBtn">
+          <span>✝</span> Leave a Loving Tribute
         </button>
       </div>
 
-      <!-- Add Condolence Form -->
-      <form id="condolenceForm" onsubmit="submitCondolence(event)" class="bg-parchment/60 p-4 rounded-xl border border-[#E5DAC0] mb-6 space-y-3">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <input type="text" id="condolenceName" placeholder="Your Name (e.g. Grandson Mark, Sister Mary)" required class="text-xs px-3.5 py-2.5 rounded-lg border border-[#D7C7A7] bg-white text-softCharcoal focus:outline-none focus:border-holyGold">
-          <input type="text" id="condolenceRelation" placeholder="Relationship / Location (e.g. Family Friend, Texas)" class="text-xs px-3.5 py-2.5 rounded-lg border border-[#D7C7A7] bg-white text-softCharcoal focus:outline-none focus:border-holyGold">
+      <div class="tributes-list" id="tributesContainer">
+        <div class="tribute-item">
+          <div class="tribute-author">
+            <span class="tribute-name">Your Loving Family</span>
+            <span class="tribute-date">Always & Forever</span>
+          </div>
+          <p class="tribute-message">"Thank you for teaching us unconditional love, unwavering faith in the Lord, and kindness. Reunited in God's eternal paradise, resting peacefully until we meet again."</p>
         </div>
-        <textarea id="condolenceMessage" rows="2" placeholder="Write your prayer, favorite memory of Nani or Nana, or words of comfort..." required class="w-full text-xs p-3 rounded-lg border border-[#D7C7A7] bg-white text-softCharcoal focus:outline-none focus:border-holyGold font-serif text-sm"></textarea>
-        <div class="flex justify-end">
-          <button type="submit" class="px-5 py-2 rounded-full bg-deepBurgundy hover:bg-[#380D13] text-holyGoldLight text-xs font-semibold shadow transition">
-            Post Memory 🕊️
-          </button>
-        </div>
-      </form>
-
-      <!-- Messages Wall -->
-      <div id="condolencesList" class="space-y-3.5 max-h-96 overflow-y-auto pr-1">
-        <!-- Rendered dynamically -->
       </div>
     </section>
-
-    <!-- FOOTER WITH SCRIPTURE -->
-    <footer class="text-center py-8 text-xs text-[#8A7960] border-t border-[#E5DAC0] space-y-2">
-      <div class="flex justify-center space-x-2 text-holyGold">
-        <span>✝</span>
-        <span>•</span>
-        <span>🕊️</span>
-        <span>•</span>
-        <span>✝</span>
-      </div>
-      <p class="font-serif italic text-sm text-softCharcoal max-w-md mx-auto">
-        "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain, for the old order of things has passed away."
-      </p>
-      <p class="font-cinzel tracking-wider text-[11px] text-holyGold font-semibold">— Revelation 21:4</p>
-      <p class="pt-4 text-[11px] text-[#A6977F]">Created with reverent love for keeping eternal memories alive.</p>
-    </footer>
-
   </main>
 
-  <!-- ==================== MODAL: QR CODE FOR MEMENTO & PRINT STUDIO ==================== -->
-  <div id="qrModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-    <div class="bg-[#FFFDF9] border-2 border-holyGold rounded-3xl max-w-lg w-full p-6 sm:p-8 text-center shadow-2xl relative my-auto">
-      <button onclick="closeQrModal()" class="absolute top-4 right-4 text-gray-400 hover:text-black text-xl p-1 transition">✕</button>
-      
-      <div class="w-12 h-12 rounded-full bg-parchmentDark text-holyGold mx-auto flex items-center justify-center text-2xl mb-2 shadow-inner border border-holyGoldLight">
-        ✝
-      </div>
-      <h3 class="font-serif text-2xl font-bold text-deepBurgundy">Memento QR Code Card</h3>
-      <p class="text-xs font-serif italic text-[#7A6B53] mb-5">
-        Print or engrave this token for the keepsake memento so visitors can listen to Nani's voice and watch Nana's video.
-      </p>
-
-      <!-- URL Input Field (allows setting custom deployed domain) -->
-      <div class="text-left bg-parchment/80 p-3 rounded-xl border border-[#DFD1B5] mb-5">
-        <label class="block text-[11px] font-cinzel font-bold text-holyGold uppercase mb-1">Target Website URL for Memento</label>
-        <div class="flex gap-2">
-          <input type="url" id="qrCustomUrlInput" class="w-full text-xs px-3 py-2 rounded-lg border border-[#DAC6A0] bg-white text-softCharcoal focus:outline-none focus:border-holyGold font-mono" placeholder="https://your-domain.com">
-          <button onclick="updateGeneratedQr()" class="px-3 py-2 bg-holyGold hover:bg-[#B38E46] text-white rounded-lg text-xs font-cinzel font-semibold whitespace-nowrap shadow-sm transition">
-            Update QR
-          </button>
-        </div>
-        <p class="text-[10px] text-[#8C7A5E] mt-1 italic">Defaults to this website's current link or your uploaded domain.</p>
-      </div>
-
-      <!-- Printable Keepsake Frame Container -->
-      <div id="printableCardFrame" class="bg-[#FFFDF8] p-6 rounded-2xl border-2 border-[#C5A059] shadow-md inline-block max-w-xs mx-auto mb-5 relative">
-        <!-- Vintage Corner Accents -->
-        <div class="absolute top-2 left-2 text-[#C5A059] text-xs leading-none">✤</div>
-        <div class="absolute top-2 right-2 text-[#C5A059] text-xs leading-none">✤</div>
-        <div class="absolute bottom-2 left-2 text-[#C5A059] text-xs leading-none">✤</div>
-        <div class="absolute bottom-2 right-2 text-[#C5A059] text-xs leading-none">✤</div>
-
-        <div class="text-[11px] font-cinzel tracking-widest text-holyGold uppercase font-semibold mb-1">In Sacred Remembrance</div>
-        <div class="font-serif font-bold text-deepBurgundy text-base leading-tight" id="qrCardNameNani">Grace & Arthur</div>
-        <div class="text-[10px] font-serif italic text-softCharcoal/80 mb-3">Scan to hear her voice & watch his video</div>
-
-        <div class="bg-white p-3 rounded-xl border border-[#E8DCC2] inline-block shadow-inner">
-          <div id="qrcodeCanvas" class="flex justify-center"></div>
-        </div>
-
-        <div class="text-[10px] font-cinzel tracking-wider text-[#8A7960] mt-3">✝ REUNITED IN HEAVEN ✝</div>
-      </div>
-
-      <!-- Actions: Download High-Res PNG / Print Keepsake / Copy URL -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-        <button onclick="downloadQrPng()" class="py-2.5 px-3 text-xs font-semibold rounded-full bg-holyGold hover:bg-[#B38E46] text-white shadow transition flex items-center justify-center space-x-1">
-          <span>💾</span>
-          <span>Save PNG</span>
-        </button>
-        <button onclick="copyCurrentUrl()" class="py-2.5 px-3 text-xs font-semibold rounded-full bg-parchment border border-holyGold text-deepBurgundy hover:bg-[#EFE5D2] transition flex items-center justify-center space-x-1">
-          <span>📋</span>
-          <span>Copy Link</span>
-        </button>
-        <button onclick="printMemorialCard()" class="py-2.5 px-3 text-xs font-semibold rounded-full bg-deepBurgundy text-holyGoldLight hover:bg-[#380D13] shadow transition flex items-center justify-center space-x-1">
-          <span>🖨️</span>
-          <span>Print Card</span>
-        </button>
-      </div>
-
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-cross">✝</div>
+      <div class="footer-note">In Loving Memory of Jayamma & Nana</div>
+      <p class="footer-scripture">"He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain." — Revelation 21:4</p>
     </div>
-  </div>
+  </footer>
 
-  <!-- ==================== MODAL: FULL IN-BROWSER MEMORIAL CUSTOMIZER ==================== -->
-  <div id="editModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-    <div class="bg-[#FFFDF9] border border-holyGold rounded-2xl max-w-2xl w-full p-5 sm:p-7 shadow-2xl my-auto max-h-[90vh] flex flex-col">
-      
-      <div class="flex items-center justify-between pb-3 border-b border-[#E3D4B6]">
-        <div class="flex items-center space-x-2">
-          <span class="text-xl">✏️</span>
-          <h3 class="font-serif text-xl font-bold text-deepBurgundy">Customize Memorial Keepsake</h3>
-        </div>
-        <button onclick="toggleEditModal()" class="text-gray-400 hover:text-black text-xl p-1">✕</button>
+  <!-- QR MODAL -->
+  <div class="modal-overlay" id="qrModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="closeQrBtn">&times;</button>
+      <div class="sacred-cross-badge" style="width:36px; height:36px; font-size:18px; margin-bottom:10px;">✝</div>
+      <h3 style="font-family: var(--font-serif); color: var(--primary);">Memento QR Keepsake</h3>
+      <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 12px;">Scan this code to visit this memorial page</p>
+
+      <div class="qr-card-preview" id="qrCardPrintArea">
+        <div class="qr-badge-title">✝ Jayamma & Nana ✝</div>
+        <div id="qrcode-display"></div>
+        <div class="qr-badge-sub">"Scan to hear her voice & watch his video"</div>
       </div>
 
-      <div class="overflow-y-auto space-y-6 py-4 flex-1 pr-1">
-        
-        <!-- General Header & Scripture -->
-        <div class="space-y-3 bg-parchment/60 p-4 rounded-xl border border-[#E5DAC0]">
-          <h4 class="font-cinzel text-xs font-bold text-holyGold uppercase tracking-wider">Memorial Header & Scripture</h4>
-          <div>
-            <label class="block text-xs font-medium text-softCharcoal mb-1">Memorial Title</label>
-            <input type="text" id="editMemorialTitle" class="w-full text-xs p-2 rounded border border-[#D5C29D] bg-white">
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-softCharcoal mb-1">Sub-heading</label>
-            <input type="text" id="editHeaderSub" class="w-full text-xs p-2 rounded border border-[#D5C29D] bg-white">
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <div class="sm:col-span-2">
-              <label class="block text-xs font-medium text-softCharcoal mb-1">Memorial Bible Verse</label>
-              <textarea id="editScriptureText" rows="2" class="w-full text-xs p-2 rounded border border-[#D5C29D] bg-white"></textarea>
-            </div>
-            <div>
-              <label class="block text-xs font-medium text-softCharcoal mb-1">Scripture Reference</label>
-              <input type="text" id="editScriptureRef" class="w-full text-xs p-2 rounded border border-[#D5C29D] bg-white">
-            </div>
-          </div>
-        </div>
-
-        <!-- Nani's Details & Voice Recording -->
-        <div class="space-y-3 bg-[#FAF3E8] p-4 rounded-xl border border-[#E5DAC0]">
-          <h4 class="font-cinzel text-xs font-bold text-deepBurgundy uppercase tracking-wider flex items-center space-x-1">
-            <span>🕊️</span><span>Nani's Details & Voice Recording</span>
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-medium text-softCharcoal mb-1">Nani's Name</label>
-              <input type="text" id="editNaniName" class="w-full text-xs p-2 rounded border border-[#D5C29D] bg-white">
-            </div>
-            <div>
-              <label class="block text-xs font-medium text-softCharcoal mb-1">Life Dates (e.g. 1941 - 2024)</label>
-              <input type="text" id="editNaniDates" class="w-full text-xs p-2 rounded border border-[#D5C29D] bg-white">
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-softCharcoal mb-1">Nani's Photo URL or File</label>
-            <div class="flex gap-2">
-              <input type="text" id="editNaniPhotoUrl" placeholder="https://..." class="flex-1 text-xs p-2 rounded border border-[#D5C29D] bg-white">
-              <label class="px-3 py-2 bg-parchment border border-holyGold text-xs rounded cursor-pointer hover:bg-parchmentDark">
-                Upload Photo
-                <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event, 'naniPhoto')">
-              </label>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-softCharcoal mb-1">Nani's Voice Recording (.mp3, .wav URL or Upload)</label>
-            <div class="flex gap-2">
-              <input type="text" id="editNaniAudioUrl" placeholder="Direct audio URL or upload file" class="flex-1 text-xs p-2 rounded border border-[#D5C29D] bg-white">
-              <label class="px-3 py-2 bg-deepBurgundy text-holyGoldLight text-xs rounded cursor-pointer hover:bg-[#380D13]">
-                Upload Audio
-                <input type="file" accept="audio/*" class="hidden" onchange="handleFileUpload(event, 'naniAudio')">
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- Nana's Details & Video -->
-        <div class="space-y-3 bg-[#EEF2F9] p-4 rounded-xl border border-[#CAD5E5]">
-          <h4 class="font-cinzel text-xs font-bold text-royalNavy uppercase tracking-wider flex items-center space-x-1">
-            <span>🎥</span><span>Nana's Details & Video Tribute</span>
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-medium text-softCharcoal mb-1">Nana's Name</label>
-              <input type="text" id="editNanaName" class="w-full text-xs p-2 rounded border border-[#B6C5DC] bg-white">
-            </div>
-            <div>
-              <label class="block text-xs font-medium text-softCharcoal mb-1">Life Dates (e.g. 1937 - 2025)</label>
-              <input type="text" id="editNanaDates" class="w-full text-xs p-2 rounded border border-[#B6C5DC] bg-white">
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-softCharcoal mb-1">Nana's Photo URL or File</label>
-            <div class="flex gap-2">
-              <input type="text" id="editNanaPhotoUrl" placeholder="https://..." class="flex-1 text-xs p-2 rounded border border-[#B6C5DC] bg-white">
-              <label class="px-3 py-2 bg-parchment border border-royalNavy/40 text-xs rounded cursor-pointer hover:bg-parchmentDark">
-                Upload Photo
-                <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event, 'nanaPhoto')">
-              </label>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-softCharcoal mb-1">Nana's Video Source (.mp4 URL or Upload)</label>
-            <div class="flex gap-2">
-              <input type="text" id="editNanaVideoUrl" placeholder="Direct MP4 video URL or upload file" class="flex-1 text-xs p-2 rounded border border-[#B6C5DC] bg-white">
-              <label class="px-3 py-2 bg-royalNavy text-white text-xs rounded cursor-pointer hover:bg-[#0E1726]">
-                Upload Video
-                <input type="file" accept="video/*" class="hidden" onchange="handleFileUpload(event, 'nanaVideo')">
-              </label>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-softCharcoal mb-1">Video Memory Notes / Caption</label>
-            <textarea id="editNanaNotes" rows="2" class="w-full text-xs p-2 rounded border border-[#B6C5DC] bg-white font-serif"></textarea>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Action Footer -->
-      <div class="pt-4 border-t border-[#E3D4B6] flex flex-wrap items-center justify-between gap-2">
-        <button onclick="resetToDefaults()" class="text-xs text-red-600 hover:underline">
-          Reset to Sample Defaults
-        </button>
-        <div class="flex space-x-2">
-          <button onclick="exportConfigJson()" class="px-3 py-2 rounded-full border border-holyGold text-deepBurgundy bg-parchment text-xs font-semibold hover:bg-[#EFE5D2]">
-            Export JSON
-          </button>
-          <button onclick="saveMemorialEdits()" class="px-6 py-2 rounded-full bg-deepBurgundy text-holyGoldLight font-cinzel font-semibold text-xs shadow hover:bg-[#380D13]">
-            Save Changes ✝
-          </button>
-        </div>
-      </div>
-
+      <button class="btn btn-gold" id="saveQrImgBtn">
+        <span>💾</span> Save QR Image
+      </button>
     </div>
-  </div>
-
-  <!-- Notification Toast -->
-  <div id="toastMessage" class="fixed bottom-6 right-6 z-50 bg-royalNavy text-white px-4 py-2.5 rounded-xl shadow-xl text-xs font-medium transform transition duration-300 opacity-0 pointer-events-none translate-y-3">
-    Notification
   </div>
 
   <script>
-    /* ========================================================================
-       DEFAULT DATA STATE
-       ======================================================================== */
-    const DEFAULT_MEMORIAL = {
-      memorialTitle: "Reunited in Heaven",
-      headerSub: "In Blessed Memory & Everlasting Grace",
-      scriptureText: '"I have fought the good fight, I have finished the race, I have kept the faith. Now there is in store for me the crown of righteousness."',
-      scriptureRef: "— 2 Timothy 4:7-8",
-      
-      nani: {
-        name: 'Grace "Nani" Evelyn',
-        dates: "April 14, 1941 – November 22, 2024",
-        epitaph: '"A woman of deep prayer, tender hugs, warm kitchen stories, and unwavering devotion to her family and faith."',
-        photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
-        audioUrl: "", // Will use synthesized sacred hymn/voice tone if empty
-        audioTitle: "Nani's Voice & Blessing",
-        audioSub: "Recorded with love for her grandchildren"
-      },
-      nana: {
-        name: 'Arthur "Nana" Joseph',
-        dates: "August 28, 1937 – January 15, 2025",
-        epitaph: '"A gentle soul whose joyous laughter, wise counsel, and steadfast integrity illuminated all our lives."',
-        photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
-        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        videoTitle: "Nana's Final Words & Smiles",
-        videoSub: "His laughter, wisdom, and warm greeting",
-        notes: '"Nana on his favorite wooden armchair, holding his bible, sharing stories of his early days with Nani and blessing each of his grandchildren by name."'
-      },
-      candlesLit: 148,
-      condolences: [
-        {
-          id: 1,
-          name: "Your Loving Family",
-          relation: "Children & Grandchildren",
-          message: "Thank you for the unconditional love, prayers, and blessed memories that will guide our family for generations to come.",
-          date: "Forever in our hearts"
-        }
-      ]
-    };
-
-    let memorialData = {};
-    let isCandleLit = false;
-
-    // Initialize state from localStorage or defaults
-    function initData() {
-      try {
-        const saved = localStorage.getItem('keepsake_memorial_v1');
-        if (saved) {
-          memorialData = JSON.parse(saved);
-        } else {
-          memorialData = JSON.parse(JSON.stringify(DEFAULT_MEMORIAL));
-        }
-      } catch (e) {
-        memorialData = JSON.parse(JSON.stringify(DEFAULT_MEMORIAL));
-      }
-      renderMemorial();
+    // Build Waveform Sticks
+    const waveform = document.getElementById('waveformContainer');
+    for (let i = 0; i < 28; i++) {
+      const stick = document.createElement('div');
+      stick.className = 'wave-stick';
+      stick.style.height = (20 + (Math.sin(i / 3) * 35 + 30)) + '%';
+      waveform.appendChild(stick);
     }
 
-    /* ========================================================================
-       RENDER TO DOM
-       ======================================================================== */
-    function renderMemorial() {
-      // Texts & Scriptures
-      document.getElementById('dispMemorialTitle').innerText = memorialData.memorialTitle;
-      document.getElementById('dispHeaderSub').innerText = memorialData.headerSub;
-      document.getElementById('dispPrimaryScripture').innerText = memorialData.scriptureText;
-      document.getElementById('dispScriptureRef').innerText = memorialData.scriptureRef;
+    // Media Switcher
+    function selectMediaView(mode) {
+      document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+      const activeTab = document.querySelector(`.mode-tab[data-mode="${mode}"]`);
+      if (activeTab) activeTab.classList.add('active');
 
-      // Nani
-      document.getElementById('dispNaniName').innerText = memorialData.nani.name;
-      document.getElementById('dispNaniDates').innerText = memorialData.nani.dates;
-      document.getElementById('dispNaniEpitaph').innerText = memorialData.nani.epitaph;
-      document.getElementById('dispNaniPhoto').src = memorialData.nani.photo;
-      document.getElementById('dispNaniAudioTitle').innerText = memorialData.nani.audioTitle;
-      document.getElementById('dispNaniAudioSub').innerText = memorialData.nani.audioSub;
+      const audioCard = document.getElementById('audioSectionCard');
+      const videoCard = document.getElementById('videoSectionCard');
 
-      // Nana
-      document.getElementById('dispNanaName').innerText = memorialData.nana.name;
-      document.getElementById('dispNanaDates').innerText = memorialData.nana.dates;
-      document.getElementById('dispNanaEpitaph').innerText = memorialData.nana.epitaph;
-      document.getElementById('dispNanaPhoto').src = memorialData.nana.photo;
-      document.getElementById('dispNanaVideoTitle').innerText = memorialData.nana.videoTitle;
-      document.getElementById('dispNanaVideoSub').innerText = memorialData.nana.videoSub;
-      document.getElementById('dispNanaNotes').innerText = memorialData.nana.notes;
-
-      // Video source
-      const vid = document.getElementById('nanaVideoPlayer');
-      const src = document.getElementById('nanaVideoSource');
-      if (src.src !== memorialData.nana.videoUrl && memorialData.nana.videoUrl) {
-        src.src = memorialData.nana.videoUrl;
-        vid.load();
-      }
-
-      // Audio setup
-      const audioEl = document.getElementById('naniAudioElement');
-      if (memorialData.nani.audioUrl) {
-        audioEl.src = memorialData.nani.audioUrl;
-      }
-
-      // Candles
-      document.getElementById('candleCount').innerText = memorialData.candlesLit;
-
-      // Condolences
-      renderCondolences();
-    }
-
-    function renderCondolences() {
-      const container = document.getElementById('condolencesList');
-      container.innerHTML = '';
-      if (!memorialData.condolences || memorialData.condolences.length === 0) {
-        container.innerHTML = `<p class="text-xs text-[#8A7960] font-serif italic text-center py-4">Be the first to leave a blessing or sacred remembrance.</p>`;
-        return;
-      }
-
-      memorialData.condolences.forEach(c => {
-        const item = document.createElement('div');
-        item.className = "p-4 rounded-xl bg-parchment/70 border border-[#EBE2D0] shadow-sm";
-        item.innerHTML = `
-          <div class="flex items-center justify-between mb-1.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-6 h-6 rounded-full bg-holyGoldLight text-deepBurgundy flex items-center justify-center text-xs font-bold font-serif">✝</span>
-              <span class="font-serif font-bold text-softCharcoal text-sm">${escapeHtml(c.name)}</span>
-              ${c.relation ? `<span class="text-[11px] text-[#8A7960] font-serif italic">(${escapeHtml(c.relation)})</span>` : ''}
-            </div>
-            <span class="text-[10px] text-[#A3937C]">${escapeHtml(c.date || 'Recently')}</span>
-          </div>
-          <p class="font-serif italic text-xs text-softCharcoal/90 pl-8 leading-relaxed">"${escapeHtml(c.message)}"</p>
-        `;
-        container.appendChild(item);
-      });
-    }
-
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-
-    /* ========================================================================
-       MEDIA CONTROL: NANI'S AUDIO (WITH WEB AUDIO SYNTHETIC BLESSING FALLBACK)
-       ======================================================================== */
-    let isAudioPlaying = false;
-    let synthAudioContext = null;
-    let synthInterval = null;
-    let audioTimer = 0;
-    const synthDuration = 72; // 1 min 12 sec sample
-
-    function toggleAudio() {
-      const audioEl = document.getElementById('naniAudioElement');
-      
-      if (memorialData.nani.audioUrl) {
-        // Real user uploaded/linked audio file
-        if (audioEl.paused) {
-          audioEl.play().catch(e => {
-            showToast("Click play once more or verify audio file format.");
-          });
-          setAudioPlayingState(true);
-        } else {
-          audioEl.pause();
-          setAudioPlayingState(false);
-        }
-      } else {
-        // Fallback: Synthesized peaceful blessing prayer chords
-        if (!isAudioPlaying) {
-          startSynthesizedBlessing();
-          setAudioPlayingState(true);
-        } else {
-          stopSynthesizedBlessing();
-          setAudioPlayingState(false);
-        }
+      if (mode === 'both') {
+        audioCard.style.display = 'flex';
+        videoCard.style.display = 'flex';
+      } else if (mode === 'audio') {
+        audioCard.style.display = 'flex';
+        videoCard.style.display = 'none';
+        audioCard.scrollIntoView({ behavior: 'smooth' });
+      } else if (mode === 'video') {
+        audioCard.style.display = 'none';
+        videoCard.style.display = 'flex';
+        videoCard.scrollIntoView({ behavior: 'smooth' });
       }
     }
 
-    function setAudioPlayingState(playing) {
-      isAudioPlaying = playing;
-      const playIcon = document.getElementById('playIconSvg');
-      const waveBars = document.querySelectorAll('.wave-bar');
-      
-      if (playing) {
-        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-        waveBars.forEach(b => b.classList.add('active'));
-      } else {
-        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-        waveBars.forEach(b => b.classList.remove('active'));
-      }
-    }
-
-    // Web Audio Synthesized prayer chime & gentle sacred pipe tones
-    function startSynthesizedBlessing() {
-      try {
-        if (!synthAudioContext) {
-          synthAudioContext = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (synthAudioContext.state === 'suspended') {
-          synthAudioContext.resume();
-        }
-
-        const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23]; // C, E, G, High C, A, F
-        let step = 0;
-
-        playSacredTone(notes[0], 2.5);
-
-        synthInterval = setInterval(() => {
-          audioTimer++;
-          if (audioTimer > synthDuration) {
-            audioTimer = 0;
-            toggleAudio();
-            return;
-          }
-          
-          updateScrubberDisplay(audioTimer, synthDuration);
-
-          if (audioTimer % 4 === 0) {
-            const freq = notes[step % notes.length];
-            playSacredTone(freq, 3.0);
-            step++;
-          }
-        }, 1000);
-
-      } catch (err) {
-        console.warn("Audio synthesis:", err);
-      }
-    }
-
-    function playSacredTone(frequency, duration) {
-      if (!synthAudioContext) return;
-      const osc = synthAudioContext.createOscillator();
-      const gain = synthAudioContext.createGain();
-      
-      osc.type = 'triangle'; // gentle warm chime / organ-like tone
-      osc.frequency.setValueAtTime(frequency, synthAudioContext.currentTime);
-
-      gain.gain.setValueAtTime(0, synthAudioContext.currentTime);
-      gain.gain.linearRampToValueAtTime(0.08, synthAudioContext.currentTime + 0.3);
-      gain.gain.exponentialRampToValueAtTime(0.0001, synthAudioContext.currentTime + duration);
-
-      osc.connect(gain);
-      gain.connect(synthAudioContext.destination);
-
-      osc.start();
-      osc.stop(synthAudioContext.currentTime + duration);
-    }
-
-    function stopSynthesizedBlessing() {
-      if (synthInterval) clearInterval(synthInterval);
-    }
-
-    function skipAudio(seconds) {
-      const audioEl = document.getElementById('naniAudioElement');
-      if (memorialData.nani.audioUrl && audioEl) {
-        audioEl.currentTime = Math.max(0, audioEl.currentTime + seconds);
-      } else {
-        audioTimer = Math.max(0, Math.min(synthDuration, audioTimer + seconds));
-        updateScrubberDisplay(audioTimer, synthDuration);
-      }
-    }
-
-    function changeAudioVolume(val) {
-      const audioEl = document.getElementById('naniAudioElement');
-      if (audioEl) audioEl.volume = val;
-    }
-
-    function updateScrubberDisplay(cur, total) {
-      const scrub = document.getElementById('audioScrubber');
-      scrub.value = (cur / (total || 1)) * 100;
-      document.getElementById('audioCurrentTime').innerText = formatTime(cur);
-      document.getElementById('audioDuration').innerText = formatTime(total);
-    }
-
-    // Audio Element event listeners
-    const naniNativeAudio = document.getElementById('naniAudioElement');
-    naniNativeAudio.addEventListener('timeupdate', () => {
-      updateScrubberDisplay(naniNativeAudio.currentTime, naniNativeAudio.duration || 72);
-    });
-    naniNativeAudio.addEventListener('ended', () => {
-      setAudioPlayingState(false);
-    });
-
-    document.getElementById('audioScrubber').addEventListener('input', (e) => {
-      const audioEl = document.getElementById('naniAudioElement');
-      const pct = e.target.value / 100;
-      if (memorialData.nani.audioUrl && audioEl && audioEl.duration) {
-        audioEl.currentTime = pct * audioEl.duration;
-      } else {
-        audioTimer = pct * synthDuration;
-        updateScrubberDisplay(audioTimer, synthDuration);
-      }
-    });
-
-    /* ========================================================================
-       MEDIA CONTROL: NANA'S VIDEO
-       ======================================================================== */
-    const nanaVideo = document.getElementById('nanaVideoPlayer');
-    const centerVidBtn = document.getElementById('centerVideoPlayBtn');
-    const videoScrubber = document.getElementById('videoScrubber');
-
-    function toggleNanaVideo() {
-      if (nanaVideo.paused) {
-        nanaVideo.play();
-        centerVidBtn.classList.add('hidden');
-        document.getElementById('videoPlayIcon').innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-      } else {
-        nanaVideo.pause();
-        centerVidBtn.classList.remove('hidden');
-        document.getElementById('videoPlayIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
-      }
-    }
-
-    nanaVideo.addEventListener('timeupdate', () => {
-      if (nanaVideo.duration) {
-        videoScrubber.value = (nanaVideo.currentTime / nanaVideo.duration) * 100;
-        document.getElementById('videoTimeDisplay').innerText = 
-          `${formatTime(nanaVideo.currentTime)} / ${formatTime(nanaVideo.duration)}`;
-      }
-    });
-
-    videoScrubber.addEventListener('input', (e) => {
-      if (nanaVideo.duration) {
-        nanaVideo.currentTime = (e.target.value / 100) * nanaVideo.duration;
-      }
-    });
-
-    function toggleVideoMute() {
-      nanaVideo.muted = !nanaVideo.muted;
-      document.getElementById('videoMuteBtn').innerText = nanaVideo.muted ? '🔇' : '🔊';
-    }
-
-    function toggleVideoFullscreen() {
-      const container = document.getElementById('videoWrapper');
-      if (!document.fullscreenElement) {
-        container.requestFullscreen().catch(err => console.log(err));
-      } else {
-        document.exitFullscreen();
-      }
-    }
-
-    /* ========================================================================
-       VIEW TOGGLES (Both Together / Nani only / Nana only)
-       ======================================================================== */
-    function setMemorialTab(tab) {
-      const bothBtn = document.getElementById('tabBtnBoth');
-      const naniBtn = document.getElementById('tabBtnNani');
-      const nanaBtn = document.getElementById('tabBtnNana');
-      const naniSection = document.getElementById('naniMediaSection');
-      const nanaSection = document.getElementById('nanaMediaSection');
-
-      // Reset styles
-      [bothBtn, naniBtn, nanaBtn].forEach(btn => {
-        btn.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-cinzel font-semibold transition bg-white text-softCharcoal border border-[#E0D3BC] hover:border-holyGold flex items-center space-x-2";
-      });
-
-      if (tab === 'both') {
-        bothBtn.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-cinzel font-semibold transition bg-deepBurgundy text-white shadow-md flex items-center space-x-2";
-        naniSection.classList.remove('hidden');
-        nanaSection.classList.remove('hidden');
-      } else if (tab === 'nani') {
-        naniBtn.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-cinzel font-semibold transition bg-deepBurgundy text-white shadow-md flex items-center space-x-2";
-        naniSection.classList.remove('hidden');
-        nanaSection.classList.add('hidden');
-      } else if (tab === 'nana') {
-        nanaBtn.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-cinzel font-semibold transition bg-royalNavy text-white shadow-md flex items-center space-x-2";
-        naniSection.classList.add('hidden');
-        nanaSection.classList.remove('hidden');
-      }
-    }
-
-    function scrollToMedia(sectionId) {
-      setMemorialTab('both');
-      const target = document.getElementById(sectionId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
-
-    /* ========================================================================
-       AMBIENT REVERENT HYMN MUSIC (SYNTHESIZED HARP / ORGAN)
-       ======================================================================== */
-    let ambientActive = false;
-    let ambientInterval = null;
-
-    function toggleAmbientMusic() {
-      ambientActive = !ambientActive;
-      const icon = document.getElementById('ambientIcon');
-      const label = document.getElementById('ambientLabel');
-      
-      if (ambientActive) {
-        icon.innerText = '🎶';
-        label.innerText = 'Hymn: Playing';
-        startAmbientOrgan();
-        showToast("Peaceful ambient prayer chords activated");
-      } else {
-        icon.innerText = '🕊️';
-        label.innerText = 'Hymn Tone';
-        stopAmbientOrgan();
-      }
-    }
-
-    function startAmbientOrgan() {
-      if (!synthAudioContext) {
-        synthAudioContext = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (synthAudioContext.state === 'suspended') {
-        synthAudioContext.resume();
-      }
-
-      // Traditional hymns chord progressions (Amazing Grace / The Lord is My Shepherd cadence)
-      const chords = [
-        [261.63, 329.63, 392.00], // C Maj
-        [220.00, 261.63, 329.63], // A Min
-        [174.61, 220.00, 261.63], // F Maj
-        [196.00, 246.94, 293.66]  // G Maj
-      ];
-      let chordIndex = 0;
-
-      const playChord = () => {
-        if (!ambientActive) return;
-        const currentChord = chords[chordIndex % chords.length];
-        currentChord.forEach(f => {
-          const osc = synthAudioContext.createOscillator();
-          const gain = synthAudioContext.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(f, synthAudioContext.currentTime);
-
-          gain.gain.setValueAtTime(0, synthAudioContext.currentTime);
-          gain.gain.linearRampToValueAtTime(0.02, synthAudioContext.currentTime + 1.5);
-          gain.gain.exponentialRampToValueAtTime(0.0001, synthAudioContext.currentTime + 5.5);
-
-          osc.connect(gain);
-          gain.connect(synthAudioContext.destination);
-
-          osc.start();
-          osc.stop(synthAudioContext.currentTime + 5.8);
-        });
-        chordIndex++;
-      };
-
-      playChord();
-      ambientInterval = setInterval(playChord, 5000);
-    }
-
-    function stopAmbientOrgan() {
-      if (ambientInterval) clearInterval(ambientInterval);
-    }
-
-    /* ========================================================================
-       CANDLE LIGHTING FEATURE WITH ANIMATION
-       ======================================================================== */
-    function lightCandle() {
-      const input = document.getElementById('candlePrayerInput');
-      const flame = document.getElementById('candleFlame');
-      const aura = document.getElementById('candleAura');
-      const ember = document.getElementById('wickEmber');
-      const statusNote = document.getElementById('candleStatusNote');
-      const btn = document.getElementById('lightCandleBtn');
-
-      if (!isCandleLit) {
-        // Turn ON Flame with ignite animation & gentle flicker
-        flame.classList.remove('opacity-0', 'scale-0');
-        flame.classList.add('igniting');
-        aura.classList.remove('opacity-0');
-        aura.classList.add('opacity-100');
-        ember.style.backgroundColor = 'rgba(245, 158, 11, 0.9)';
-
-        setTimeout(() => {
-          flame.classList.remove('igniting');
-          flame.classList.add('flame-glow');
-        }, 800);
-
-        statusNote.innerText = "✨ The memorial flame is burning peacefully in their remembrance";
-        statusNote.classList.remove('text-holyGold');
-        statusNote.classList.add('text-deepBurgundy', 'font-semibold');
-        btn.innerHTML = "🕯️ Candle is Lit (Add Prayer)";
-        isCandleLit = true;
-      } else {
-        // Visual flare if clicked again
-        flame.style.transform = "scale(1.3) translateY(-4px)";
-        setTimeout(() => {
-          flame.style.transform = "";
-        }, 500);
-      }
-
-      memorialData.candlesLit = (memorialData.candlesLit || 0) + 1;
-      document.getElementById('candleCount').innerText = memorialData.candlesLit;
-      saveToStorage();
-
-      const prayer = input.value.trim();
-      if (prayer) {
-        memorialData.condolences.unshift({
-          id: Date.now(),
-          name: prayer,
-          relation: "Family Prayer",
-          message: "Lit a candle in loving memory and eternal prayer.",
-          date: "Just now"
-        });
-        renderCondolences();
-        input.value = '';
-      }
-
-      showToast("Candle lit in peaceful remembrance. 🕯️");
-    }
-
-    /* ========================================================================
-       CONDOLENCE / MEMORY SUBMISSION
-       ======================================================================== */
-    function submitCondolence(e) {
-      e.preventDefault();
-      const name = document.getElementById('condolenceName').value.trim();
-      const rel = document.getElementById('condolenceRelation').value.trim();
-      const msg = document.getElementById('condolenceMessage').value.trim();
-
-      if (!name || !msg) return;
-
-      memorialData.condolences.unshift({
-        id: Date.now(),
-        name: name,
-        relation: rel,
-        message: msg,
-        date: "Just now"
-      });
-
-      saveToStorage();
-      renderCondolences();
-      document.getElementById('condolenceForm').reset();
-      showToast("Thank you. Your memory and prayer have been recorded.");
-    }
-
-    /* ========================================================================
-       QR CODE GENERATION FOR MEMENTO
-       ======================================================================== */
-    let qrcodeInstance = null;
-
-    function openQrModal() {
-      // Set default URL from current window or clean address
-      const input = document.getElementById('qrCustomUrlInput');
-      if (!input.value) {
-        input.value = window.location.href.split('#')[0];
-      }
-
-      // Update names on the keepsake card
-      const naniShort = memorialData.nani.name.split(' ')[0] || 'Nani';
-      const nanaShort = memorialData.nana.name.split(' ')[0] || 'Nana';
-      document.getElementById('qrCardNameNani').innerText = `${naniShort} & ${nanaShort}`;
-
-      renderQrCode(input.value);
-      document.getElementById('qrModal').classList.remove('hidden');
-    }
-
-    function renderQrCode(urlToEncode) {
-      const qrContainer = document.getElementById('qrcodeCanvas');
-      qrContainer.innerHTML = '';
-
-      qrcodeInstance = new QRCode(qrContainer, {
-        text: urlToEncode,
-        width: 180,
-        height: 180,
-        colorDark: "#4A121A",
-        colorLight: "#FFFFFF",
-        correctLevel: QRCode.CorrectLevel.H
-      });
-    }
-
-    function updateGeneratedQr() {
-      const input = document.getElementById('qrCustomUrlInput');
-      const val = input.value.trim();
-      if (!val) {
-        showToast("Please enter a valid link address.");
-        return;
-      }
-      renderQrCode(val);
-      showToast("QR Code updated successfully! 📱");
-    }
-
-    function closeQrModal() {
-      document.getElementById('qrModal').classList.add('hidden');
-    }
-
-    function downloadQrPng() {
-      // Extract the QR canvas or img generated by QRCode.js
-      const qrCanvas = document.querySelector('#qrcodeCanvas canvas');
-      const qrImg = document.querySelector('#qrcodeCanvas img');
-      let dataUrl = '';
-
-      if (qrCanvas) {
-        dataUrl = qrCanvas.toDataURL("image/png");
-      } else if (qrImg && qrImg.src) {
-        dataUrl = qrImg.src;
-      }
-
-      if (!dataUrl) {
-        showToast("Unable to download image right now.");
-        return;
-      }
-
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataUrl);
-      downloadAnchor.setAttribute("download", "memento_qr_code.png");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-      showToast("High-res Memento QR Code downloaded! 🖼️");
-    }
-
-    function printMemorialCard() {
-      window.print();
-    }
-
-    function copyCurrentUrl() {
-      const input = document.getElementById('qrCustomUrlInput');
-      const text = input ? input.value : window.location.href;
-      const el = document.createElement('textarea');
-      el.value = text;
-      document.body.appendChild(el);
-      el.select();
-      try {
-        document.execCommand('copy');
-        showToast("Memento link copied to clipboard!");
-      } catch (e) {
-        showToast("Unable to auto-copy, please copy from the text box.");
-      }
-      document.body.removeChild(el);
-    }
-
-    /* ========================================================================
-       EDIT & CUSTOMIZE MODAL
-       ======================================================================== */
-    function toggleEditModal() {
-      const modal = document.getElementById('editModal');
-      const isHidden = modal.classList.contains('hidden');
-      if (isHidden) {
-        populateEditForm();
-        modal.classList.remove('hidden');
-      } else {
-        modal.classList.add('hidden');
-      }
-    }
-
-    function populateEditForm() {
-      document.getElementById('editMemorialTitle').value = memorialData.memorialTitle;
-      document.getElementById('editHeaderSub').value = memorialData.headerSub;
-      document.getElementById('editScriptureText').value = memorialData.scriptureText;
-      document.getElementById('editScriptureRef').value = memorialData.scriptureRef;
-
-      // Nani
-      document.getElementById('editNaniName').value = memorialData.nani.name;
-      document.getElementById('editNaniDates').value = memorialData.nani.dates;
-      document.getElementById('editNaniPhotoUrl').value = memorialData.nani.photo;
-      document.getElementById('editNaniAudioUrl').value = memorialData.nani.audioUrl || '';
-
-      // Nana
-      document.getElementById('editNanaName').value = memorialData.nana.name;
-      document.getElementById('editNanaDates').value = memorialData.nana.dates;
-      document.getElementById('editNanaPhotoUrl').value = memorialData.nana.photo;
-      document.getElementById('editNanaVideoUrl').value = memorialData.nana.videoUrl || '';
-      document.getElementById('editNanaNotes').value = memorialData.nana.notes;
-    }
-
-    function handleFileUpload(event, type) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const dataUrl = e.target.result;
-        if (type === 'naniPhoto') {
-          document.getElementById('editNaniPhotoUrl').value = dataUrl;
-          showToast("Nani's photo uploaded!");
-        } else if (type === 'nanaPhoto') {
-          document.getElementById('editNanaPhotoUrl').value = dataUrl;
-          showToast("Nana's photo uploaded!");
-        } else if (type === 'naniAudio') {
-          document.getElementById('editNaniAudioUrl').value = dataUrl;
-          showToast("Audio recording loaded successfully!");
-        } else if (type === 'nanaVideo') {
-          document.getElementById('editNanaVideoUrl').value = dataUrl;
-          showToast("Video loaded successfully!");
-        }
-      };
-
-      // Guard large file sizes in LocalStorage
-      if (file.size > 25 * 1024 * 1024) {
-        showToast("Notice: For very large video/audio, hosting on YouTube, Vimeo or cloud URL is recommended.");
-      }
-      reader.readAsDataURL(file);
-    }
-
-    function saveMemorialEdits() {
-      memorialData.memorialTitle = document.getElementById('editMemorialTitle').value;
-      memorialData.headerSub = document.getElementById('editHeaderSub').value;
-      memorialData.scriptureText = document.getElementById('editScriptureText').value;
-      memorialData.scriptureRef = document.getElementById('editScriptureRef').value;
-
-      // Nani
-      memorialData.nani.name = document.getElementById('editNaniName').value;
-      memorialData.nani.dates = document.getElementById('editNaniDates').value;
-      memorialData.nani.photo = document.getElementById('editNaniPhotoUrl').value || memorialData.nani.photo;
-      memorialData.nani.audioUrl = document.getElementById('editNaniAudioUrl').value;
-
-      // Nana
-      memorialData.nana.name = document.getElementById('editNanaName').value;
-      memorialData.nana.dates = document.getElementById('editNanaDates').value;
-      memorialData.nana.photo = document.getElementById('editNanaPhotoUrl').value || memorialData.nana.photo;
-      memorialData.nana.videoUrl = document.getElementById('editNanaVideoUrl').value;
-      memorialData.nana.notes = document.getElementById('editNanaNotes').value;
-
-      saveToStorage();
-      renderMemorial();
-      toggleEditModal();
-      showToast("Memorial updated and saved to your device! ✝");
-    }
-
-    function resetToDefaults() {
-      memorialData = JSON.parse(JSON.stringify(DEFAULT_MEMORIAL));
-      saveToStorage();
-      renderMemorial();
-      populateEditForm();
-      showToast("Reset to sample memorial data.");
-    }
-
-    function exportConfigJson() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(memorialData, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", "memorial_keepsake_config.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-      showToast("Configuration downloaded!");
-    }
-
-    function saveToStorage() {
-      try {
-        localStorage.setItem('keepsake_memorial_v1', JSON.stringify(memorialData));
-      } catch (err) {
-        console.warn("Storage quota full or private browsing:", err);
-      }
-    }
-
-    /* ========================================================================
-       UTILITIES
-       ======================================================================== */
-    function formatTime(sec) {
-      if (isNaN(sec) || sec === Infinity) return "0:00";
+    // Audio Player
+    const audio = document.getElementById('naniAudioElement');
+    const playBtn = document.getElementById('voicePlayBtn');
+    const scrubber = document.getElementById('audioScrubber');
+    const curTimeTxt = document.getElementById('audioCurrentTime');
+    const durTxt = document.getElementById('audioDuration');
+    const sticks = document.querySelectorAll('.wave-stick');
+
+    function fmtTime(sec) {
+      if (isNaN(sec)) return "0:00";
       const m = Math.floor(sec / 60);
       const s = Math.floor(sec % 60);
       return `${m}:${s < 10 ? '0' : ''}${s}`;
     }
 
-    function showToast(msg) {
-      const toast = document.getElementById('toastMessage');
-      toast.innerText = msg;
-      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
-      toast.classList.add('opacity-100', 'translate-y-0');
-      setTimeout(() => {
-        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
-        toast.classList.remove('opacity-100', 'translate-y-0');
-      }, 3200);
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(e => console.log(e));
+        playBtn.textContent = '❚❚';
+        sticks.forEach(s => s.classList.add('active'));
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+        sticks.forEach(s => s.classList.remove('active'));
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration)) {
+        scrubber.value = (audio.currentTime / audio.duration) * 100;
+        curTimeTxt.textContent = fmtTime(audio.currentTime);
+      }
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      durTxt.textContent = fmtTime(audio.duration);
+    });
+
+    scrubber.addEventListener('input', () => {
+      if (!isNaN(audio.duration)) {
+        audio.currentTime = (scrubber.value / 100) * audio.duration;
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      playBtn.textContent = '▶';
+      sticks.forEach(s => s.classList.remove('active'));
+    });
+
+    // Candle Vigil Interaction
+    const candle = document.getElementById('memorialCandle');
+    const lightBtn = document.getElementById('lightCandleBtn');
+    const candleCount = document.getElementById('candleCount');
+    let isLit = false;
+
+    function igniteCandle() {
+      if (!isLit) {
+        candle.classList.add('lit');
+        lightBtn.textContent = '🕯️ Candle Burning in Prayer';
+        lightBtn.style.opacity = '0.85';
+        candleCount.textContent = parseInt(candleCount.textContent) + 1;
+        isLit = true;
+      }
     }
 
-    // Startup
-    window.onload = function() {
-      initData();
-    };
+    candle.addEventListener('click', igniteCandle);
+    lightBtn.addEventListener('click', igniteCandle);
+
+    // Tribute Wall Submission
+    document.getElementById('submitTributeBtn').addEventListener('click', () => {
+      const author = document.getElementById('tributeAuthor').value.trim() || 'A Loving Relative';
+      const relation = document.getElementById('tributeRelation').value.trim();
+      const msg = document.getElementById('tributeMessage').value.trim();
+
+      if (!msg) return;
+
+      const container = document.getElementById('tributesContainer');
+      const item = document.createElement('div');
+      item.className = 'tribute-item';
+      item.innerHTML = `
+        <div class="tribute-author">
+          <span class="tribute-name">${author} ${relation ? '(' + relation + ')' : ''}</span>
+          <span class="tribute-date">Just now</span>
+        </div>
+        <p class="tribute-message">"${msg}"</p>
+      `;
+      container.prepend(item);
+
+      document.getElementById('tributeMessage').value = '';
+    });
+
+    // Hymn Audio Chords (Web Audio API)
+    let audioCtx = null;
+    let hymnPlaying = false;
+    let hymnTimer = null;
+
+    document.getElementById('hymnToggleBtn').addEventListener('click', () => {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      
+      const btnText = document.getElementById('hymnBtnText');
+      if (!hymnPlaying) {
+        hymnPlaying = true;
+        btnText.textContent = 'Pause Hymn';
+        playSacredChord();
+        hymnTimer = setInterval(playSacredChord, 4000);
+      } else {
+        hymnPlaying = false;
+        btnText.textContent = 'Hymn';
+        clearInterval(hymnTimer);
+      }
+    });
+
+    function playSacredChord() {
+      if (!audioCtx) return;
+      const chords = [
+        [261.63, 329.63, 392.00], // C major
+        [220.00, 261.63, 329.63], // A minor
+        [174.61, 220.00, 261.63], // F major
+        [196.00, 246.94, 293.66]  // G major
+      ];
+      const chord = chords[Math.floor(Math.random() * chords.length)];
+      chord.forEach(freq => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 1.2);
+        gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 3.8);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 4);
+      });
+    }
+
+    // QR Modal
+    const qrModal = document.getElementById('qrModal');
+    let qrGenerated = false;
+
+    document.getElementById('openQrBtn').addEventListener('click', () => {
+      qrModal.classList.add('active');
+      if (!qrGenerated) {
+        new QRCode(document.getElementById('qrcode-display'), {
+          text: window.location.href,
+          width: 170,
+          height: 170,
+          colorDark: "#4A121A",
+          colorLight: "#FFFFFF",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+        qrGenerated = true;
+      }
+    });
+
+    document.getElementById('closeQrBtn').addEventListener('click', () => {
+      qrModal.classList.remove('active');
+    });
+
+    document.getElementById('saveQrImgBtn').addEventListener('click', () => {
+      const img = document.querySelector('#qrcode-display img');
+      if (img && img.src) {
+        const a = document.createElement('a');
+        a.href = img.src;
+        a.download = 'Memento-Keepsake-QR.png';
+        a.click();
+      }
+    });
   </script>
 </body>
 </html>
