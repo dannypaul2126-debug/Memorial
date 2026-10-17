@@ -47,13 +47,69 @@
       font-family: var(--font-body);
       font-size: 19px;
       line-height: 1.6;
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(74, 18, 26, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 0% 100%, rgba(74, 18, 26, 0.05) 0%, transparent 50%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* SACRED CHRISTIAN BACKGROUND ANIMATION */
+    .bg-sacred-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      background: 
+        radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.18) 0%, transparent 65%),
+        radial-gradient(circle at 100% 100%, rgba(74, 18, 26, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(74, 18, 26, 0.06) 0%, transparent 50%);
+    }
+
+    /* Heavenly Ray Pulse */
+    .celestial-rays {
+      position: absolute;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(231, 211, 159, 0.25) 0%, rgba(197, 160, 89, 0.08) 40%, transparent 70%);
+      animation: divinePulse 10s ease-in-out infinite alternate;
+      border-radius: 50%;
+    }
+
+    @keyframes divinePulse {
+      0% { transform: translateX(-50%) scale(0.9); opacity: 0.5; }
+      100% { transform: translateX(-50%) scale(1.15); opacity: 0.9; }
+    }
+
+    /* Floating Sacred Symbols */
+    .sacred-particle {
+      position: absolute;
+      color: rgba(197, 160, 89, 0.35);
+      user-select: none;
+      animation: floatCrossUpward linear infinite;
+      font-family: var(--font-serif);
+      filter: drop-shadow(0 0 6px rgba(231, 211, 159, 0.6));
+    }
+
+    @keyframes floatCrossUpward {
+      0% {
+        transform: translateY(105vh) rotate(0deg) scale(0.7);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.7;
+      }
+      85% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(12deg) scale(1.1);
+        opacity: 0;
+      }
     }
 
     .container {
@@ -61,6 +117,8 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
+      position: relative;
+      z-index: 1;
     }
 
     /* TOP BAR */
@@ -69,10 +127,9 @@
       border-bottom: 1px solid rgba(197, 160, 89, 0.35);
       position: sticky;
       top: 0;
-      background: rgba(250, 247, 240, 0.95);
+      background: rgba(250, 247, 240, 0.92);
       backdrop-filter: blur(10px);
       z-index: 100;
-      transition: all 0.3s ease;
     }
 
     .header-content {
@@ -214,7 +271,7 @@
       max-width: 650px;
       margin: 0 auto 36px;
       padding: 16px 24px;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.7);
       border-radius: 12px;
       border-left: 3px solid var(--gold);
       border-right: 3px solid var(--gold);
@@ -246,7 +303,7 @@
     }
 
     .tribute-card {
-      background: var(--white);
+      background: rgba(255, 255, 255, 0.92);
       border: 1px solid rgba(197, 160, 89, 0.35);
       border-radius: 20px;
       padding: 32px 28px;
@@ -257,6 +314,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      backdrop-filter: blur(4px);
     }
 
     .tribute-card::before {
@@ -357,7 +415,7 @@
       box-shadow: 0 4px 15px rgba(74, 18, 26, 0.25);
     }
 
-    /* MEDIA PLAYERS CONTAINER */
+    /* MEDIA PLAYERS */
     .media-stage {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -366,13 +424,14 @@
     }
 
     .media-card {
-      background: var(--white);
+      background: rgba(255, 255, 255, 0.94);
       border: 1px solid rgba(197, 160, 89, 0.35);
       border-radius: 20px;
       padding: 28px;
       box-shadow: var(--shadow-md);
       display: flex;
       flex-direction: column;
+      backdrop-filter: blur(4px);
     }
 
     .media-card-header {
@@ -410,7 +469,7 @@
       color: var(--gold-dark);
     }
 
-    /* AUDIO PLAYER STYLES */
+    /* AUDIO PLAYER */
     .audio-player-box {
       background: var(--cream);
       border: 1px solid var(--gold-light);
@@ -513,7 +572,7 @@
       color: var(--text-muted);
     }
 
-    /* VIDEO PLAYER STYLES */
+    /* VIDEO PLAYER */
     .video-container {
       position: relative;
       width: 100%;
@@ -531,34 +590,9 @@
       display: block;
     }
 
-    .video-overlay-btn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: rgba(74, 18, 26, 0.85);
-      border: 2px solid var(--gold);
-      color: white;
-      font-size: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-
-    .video-overlay-btn:hover {
-      transform: translate(-50%, -50%) scale(1.1);
-      background: var(--primary);
-    }
-
-    /* CANDLE & VIGIL SECTION */
+    /* CANDLE & VIGIL */
     .candle-section {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(243, 235, 221, 0.8));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(243, 235, 221, 0.88));
       border: 1px solid rgba(197, 160, 89, 0.35);
       border-radius: 24px;
       padding: 40px 24px;
@@ -679,7 +713,7 @@
       margin-bottom: 12px;
     }
 
-    /* MEMORY / CONDOLENCE WALL */
+    /* MEMORY WALL */
     .wall-section {
       margin-bottom: 60px;
     }
@@ -696,7 +730,7 @@
     }
 
     .tribute-submission {
-      background: var(--white);
+      background: rgba(255, 255, 255, 0.94);
       border: 1px solid rgba(197, 160, 89, 0.4);
       border-radius: 16px;
       padding: 24px;
@@ -741,7 +775,7 @@
     }
 
     .tribute-item {
-      background: var(--white);
+      background: rgba(255, 255, 255, 0.92);
       border: 1px solid rgba(197, 160, 89, 0.3);
       border-radius: 12px;
       padding: 18px 20px;
@@ -781,6 +815,8 @@
       background: var(--cream-dark);
       padding: 36px 0;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .footer-cross {
@@ -877,7 +913,6 @@
       color: var(--text-muted);
     }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
       .couples-grid, .media-stage {
         grid-template-columns: 1fr;
@@ -896,6 +931,18 @@
   </style>
 </head>
 <body>
+
+  <!-- SACRED CHRISTIAN BACKGROUND ANIMATION -->
+  <div class="bg-sacred-overlay">
+    <div class="celestial-rays"></div>
+    <!-- Floating Crosses & Dove particles -->
+    <span class="sacred-particle" style="left: 10%; font-size: 22px; animation-duration: 22s; animation-delay: 0s;">✝</span>
+    <span class="sacred-particle" style="left: 25%; font-size: 16px; animation-duration: 18s; animation-delay: 4s;">✤</span>
+    <span class="sacred-particle" style="left: 45%; font-size: 26px; animation-duration: 25s; animation-delay: 2s;">✝</span>
+    <span class="sacred-particle" style="left: 65%; font-size: 18px; animation-duration: 20s; animation-delay: 7s;">🕊️</span>
+    <span class="sacred-particle" style="left: 80%; font-size: 24px; animation-duration: 24s; animation-delay: 3s;">✝</span>
+    <span class="sacred-particle" style="left: 92%; font-size: 16px; animation-duration: 19s; animation-delay: 8s;">✤</span>
+  </div>
 
   <!-- TOP BAR -->
   <header>
@@ -950,13 +997,13 @@
         </button>
       </div>
 
-      <!-- Nana -->
+      <!-- Nana Zachariah -->
       <div class="tribute-card">
         <div class="portrait-frame">
-          <img src="nana.png" alt="Beloved Grandfather" class="portrait-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80';">
+          <img src="nana.png" alt="Nana Zachariah" class="portrait-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80';">
         </div>
         <div class="person-role">Our Beloved Grandfather</div>
-        <h2 class="person-name">Nana</h2>
+        <h2 class="person-name">Zachariah</h2>
         <div class="person-dates">In God's Eternal Keeping</div>
         <p class="person-quote">"A pillar of strength, humble integrity, and Christian love whose kindness and guidance shaped generations."</p>
         <button class="btn btn-outline" onclick="selectMediaView('video')">
@@ -974,7 +1021,7 @@
         <span>🕊️</span> Nani's Voice
       </button>
       <button class="mode-tab" data-mode="video" onclick="selectMediaView('video')">
-        <span>🎬</span> Nana's Video
+        <span>🎬</span> Zachariah's Video
       </button>
     </div>
 
@@ -991,9 +1038,7 @@
         </div>
 
         <div class="audio-player-box">
-          <div class="audio-waveform-bar" id="waveformContainer">
-            <!-- 28 animated wave sticks -->
-          </div>
+          <div class="audio-waveform-bar" id="waveformContainer"></div>
 
           <div class="audio-controls-row">
             <button class="play-btn" id="voicePlayBtn">▶</button>
@@ -1010,12 +1055,12 @@
         <audio id="naniAudioElement" src="nani-voice.mp3" preload="metadata"></audio>
       </div>
 
-      <!-- Video Player (Nana) -->
+      <!-- Video Player (Zachariah) -->
       <div class="media-card" id="videoSectionCard">
         <div class="media-card-header">
           <div class="media-icon-badge">🎬</div>
           <div class="media-title-group">
-            <h3>Nana's Remembrance</h3>
+            <h3>Zachariah's Remembrance</h3>
             <p>Cherished Video</p>
           </div>
         </div>
@@ -1034,7 +1079,7 @@
       <div class="hero-subtitle">Sacred Remembrance</div>
       <h2 style="font-family: var(--font-serif); color: var(--primary); margin-bottom: 8px;">Light a Candle in Loving Honor</h2>
       <p style="font-size: 18px; color: var(--text-muted); max-width: 500px; margin: 0 auto 16px;">
-        Tap the candle to ignite a prayer flame in memory of Jayamma & Nana.
+        Tap the candle to ignite a prayer flame in memory of Jayamma & Zachariah.
       </p>
 
       <div class="candle-container" id="memorialCandle">
@@ -1091,7 +1136,7 @@
   <footer>
     <div class="container">
       <div class="footer-cross">✝</div>
-      <div class="footer-note">In Loving Memory of Jayamma & Nana</div>
+      <div class="footer-note">In Loving Memory of Jayamma & Zachariah</div>
       <p class="footer-scripture">"He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain." — Revelation 21:4</p>
     </div>
   </footer>
@@ -1105,7 +1150,7 @@
       <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 12px;">Scan this code to visit this memorial page</p>
 
       <div class="qr-card-preview" id="qrCardPrintArea">
-        <div class="qr-badge-title">✝ Jayamma & Nana ✝</div>
+        <div class="qr-badge-title">✝ Jayamma & Zachariah ✝</div>
         <div id="qrcode-display"></div>
         <div class="qr-badge-sub">"Scan to hear her voice & watch his video"</div>
       </div>
@@ -1240,7 +1285,7 @@
       document.getElementById('tributeMessage').value = '';
     });
 
-    // Hymn Audio Chords (Web Audio API)
+    // Sacred Hymn Chords
     let audioCtx = null;
     let hymnPlaying = false;
     let hymnTimer = null;
@@ -1277,7 +1322,7 @@
         osc.frequency.value = freq;
         gain.gain.setValueAtTime(0, audioCtx.currentTime);
         gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 1.2);
-        gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 3.8);
+        gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 3.8);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
