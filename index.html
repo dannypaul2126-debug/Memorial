@@ -481,7 +481,7 @@
       color: var(--gold-dark);
     }
 
-    /* AUDIO PLAYER STYLES */
+    /* AUDIO & VIDEO CONTROLS STYLING */
     .audio-player-box {
       background: var(--cream);
       border: 1px solid var(--gold-light);
@@ -521,20 +521,20 @@
       100% { height: 95%; }
     }
 
-    .audio-controls-row {
+    .media-controls-row {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .play-btn {
-      width: 54px;
-      height: 54px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: var(--primary);
       color: white;
       border: none;
-      font-size: 20px;
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -547,6 +547,18 @@
     .play-btn:hover {
       background: var(--primary-light);
       transform: scale(1.05);
+    }
+
+    .mute-btn {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--primary);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .scrub-container {
@@ -576,7 +588,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
-    .audio-time-row {
+    .media-time-row {
       display: flex;
       justify-content: space-between;
       font-family: var(--font-sans);
@@ -584,15 +596,25 @@
       color: var(--text-muted);
     }
 
-    /* VIDEO PLAYER STYLES */
-    .video-container {
+    /* CUSTOM VIDEO PLAYER CONTAINER */
+    .video-wrapper {
+      background: var(--cream);
+      border: 1px solid var(--gold-light);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .video-viewport {
       position: relative;
       width: 100%;
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
       background: #000;
       aspect-ratio: 16/9;
-      box-shadow: var(--shadow-sm);
+      cursor: pointer;
     }
 
     .video-element {
@@ -602,9 +624,33 @@
       display: block;
     }
 
-    /* FULLSCREEN DISABLE SAFEGUARD FOR BROWSERS */
-    video::-webkit-media-controls-fullscreen-button {
-      display: none !important;
+    .video-center-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.25);
+      transition: opacity 0.2s ease;
+    }
+
+    .video-center-play-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .center-play-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: rgba(74, 18, 26, 0.88);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+      border: 1px solid var(--gold-light);
     }
 
     /* CANDLE & VIGIL SECTION */
@@ -1075,11 +1121,11 @@
         <div class="audio-player-box">
           <div class="audio-waveform-bar" id="waveformContainer"></div>
 
-          <div class="audio-controls-row">
+          <div class="media-controls-row">
             <button class="play-btn" id="voicePlayBtn">▶</button>
             <div class="scrub-container">
               <input type="range" class="scrub-slider" id="audioScrubber" value="0" min="0" max="100" step="0.1">
-              <div class="audio-time-row">
+              <div class="media-time-row">
                 <span id="audioCurrentTime">0:00</span>
                 <span id="audioDuration">Loading...</span>
               </div>
@@ -1090,7 +1136,7 @@
         <audio id="naniAudioElement" src="nani-voice.mp3" preload="metadata"></audio>
       </div>
 
-      <!-- Video Player (Zachariah) -->
+      <!-- Video Player (Zachariah) - Completely Custom Controls, No Maximize Button -->
       <div class="media-card" id="videoSectionCard">
         <div class="media-card-header">
           <div class="media-icon-badge">🎬</div>
@@ -1100,18 +1146,33 @@
           </div>
         </div>
 
-        <div class="video-container">
-          <video 
-            id="nanaVideoElement" 
-            class="video-element" 
-            playsinline 
-            webkit-playsinline 
-            controls 
-            controlsList="nofullscreen nodownload" 
-            preload="metadata">
-            <source src="nana-video.mp4" type="video/mp4">
-            Your browser does not support HTML video.
-          </video>
+        <div class="video-wrapper">
+          <div class="video-viewport" id="videoViewport">
+            <video 
+              id="nanaVideoElement" 
+              class="video-element" 
+              playsinline 
+              webkit-playsinline 
+              preload="metadata">
+              <source src="nana-video.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+            <div class="video-center-play-overlay" id="videoCenterOverlay">
+              <div class="center-play-icon">▶</div>
+            </div>
+          </div>
+
+          <div class="media-controls-row">
+            <button class="play-btn" id="videoPlayBtn">▶</button>
+            <div class="scrub-container">
+              <input type="range" class="scrub-slider" id="videoScrubber" value="0" min="0" max="100" step="0.1">
+              <div class="media-time-row">
+                <span id="videoCurrentTime">0:00</span>
+                <span id="videoDuration">0:00</span>
+              </div>
+            </div>
+            <button class="mute-btn" id="videoMuteBtn" title="Mute/Unmute">🔊</button>
+          </div>
         </div>
       </div>
     </section>
@@ -1315,53 +1376,105 @@
       }
     }
 
-    // Audio Player
-    const audio = document.getElementById('naniAudioElement');
-    const playBtn = document.getElementById('voicePlayBtn');
-    const scrubber = document.getElementById('audioScrubber');
-    const curTimeTxt = document.getElementById('audioCurrentTime');
-    const durTxt = document.getElementById('audioDuration');
-    const sticks = document.querySelectorAll('.wave-stick');
-
     function fmtTime(sec) {
-      if (isNaN(sec)) return "0:00";
+      if (isNaN(sec) || !isFinite(sec)) return "0:00";
       const m = Math.floor(sec / 60);
       const s = Math.floor(sec % 60);
       return `${m}:${s < 10 ? '0' : ''}${s}`;
     }
 
-    playBtn.addEventListener('click', () => {
+    // AUDIO CONTROLS
+    const audio = document.getElementById('naniAudioElement');
+    const voicePlayBtn = document.getElementById('voicePlayBtn');
+    const audioScrubber = document.getElementById('audioScrubber');
+    const audioCurTimeTxt = document.getElementById('audioCurrentTime');
+    const audioDurTxt = document.getElementById('audioDuration');
+    const sticks = document.querySelectorAll('.wave-stick');
+
+    voicePlayBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play().catch(e => console.log(e));
-        playBtn.textContent = '❚❚';
+        voicePlayBtn.textContent = '❚❚';
         sticks.forEach(s => s.classList.add('active'));
       } else {
         audio.pause();
-        playBtn.textContent = '▶';
+        voicePlayBtn.textContent = '▶';
         sticks.forEach(s => s.classList.remove('active'));
       }
     });
 
     audio.addEventListener('timeupdate', () => {
       if (!isNaN(audio.duration) && audio.duration > 0) {
-        scrubber.value = (audio.currentTime / audio.duration) * 100;
-        curTimeTxt.textContent = fmtTime(audio.currentTime);
+        audioScrubber.value = (audio.currentTime / audio.duration) * 100;
+        audioCurTimeTxt.textContent = fmtTime(audio.currentTime);
       }
     });
 
     audio.addEventListener('loadedmetadata', () => {
-      durTxt.textContent = fmtTime(audio.duration);
+      audioDurTxt.textContent = fmtTime(audio.duration);
     });
 
-    scrubber.addEventListener('input', () => {
+    audioScrubber.addEventListener('input', () => {
       if (!isNaN(audio.duration) && audio.duration > 0) {
-        audio.currentTime = (scrubber.value / 100) * audio.duration;
+        audio.currentTime = (audioScrubber.value / 100) * audio.duration;
       }
     });
 
     audio.addEventListener('ended', () => {
-      playBtn.textContent = '▶';
+      voicePlayBtn.textContent = '▶';
       sticks.forEach(s => s.classList.remove('active'));
+    });
+
+    // VIDEO CONTROLS (Custom inline, no maximize button)
+    const video = document.getElementById('nanaVideoElement');
+    const videoViewport = document.getElementById('videoViewport');
+    const videoCenterOverlay = document.getElementById('videoCenterOverlay');
+    const videoPlayBtn = document.getElementById('videoPlayBtn');
+    const videoScrubber = document.getElementById('videoScrubber');
+    const videoCurTimeTxt = document.getElementById('videoCurrentTime');
+    const videoDurTxt = document.getElementById('videoDuration');
+    const videoMuteBtn = document.getElementById('videoMuteBtn');
+
+    function toggleVideoPlay() {
+      if (video.paused) {
+        video.play().catch(e => console.log(e));
+        videoPlayBtn.textContent = '❚❚';
+        videoCenterOverlay.classList.add('hidden');
+      } else {
+        video.pause();
+        videoPlayBtn.textContent = '▶';
+        videoCenterOverlay.classList.remove('hidden');
+      }
+    }
+
+    videoViewport.addEventListener('click', toggleVideoPlay);
+    videoPlayBtn.addEventListener('click', toggleVideoPlay);
+
+    video.addEventListener('timeupdate', () => {
+      if (!isNaN(video.duration) && video.duration > 0) {
+        videoScrubber.value = (video.currentTime / video.duration) * 100;
+        videoCurTimeTxt.textContent = fmtTime(video.currentTime);
+      }
+    });
+
+    video.addEventListener('loadedmetadata', () => {
+      videoDurTxt.textContent = fmtTime(video.duration);
+    });
+
+    videoScrubber.addEventListener('input', () => {
+      if (!isNaN(video.duration) && video.duration > 0) {
+        video.currentTime = (videoScrubber.value / 100) * video.duration;
+      }
+    });
+
+    video.addEventListener('ended', () => {
+      videoPlayBtn.textContent = '▶';
+      videoCenterOverlay.classList.remove('hidden');
+    });
+
+    videoMuteBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      videoMuteBtn.textContent = video.muted ? '🔇' : '🔊';
     });
 
     // Candle Vigil Interaction
@@ -1420,7 +1533,7 @@
         osc.frequency.value = freq;
         gain.gain.setValueAtTime(0, audioCtx.currentTime);
         gain.gain.linearRampToValueAtTime(0.035, audioCtx.currentTime + 1.2);
-        gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 3.8);
+        gain.gain.linearRampToValueAtTime(0.035, audioCtx.currentTime + 3.8);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
