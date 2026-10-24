@@ -602,6 +602,11 @@
       display: block;
     }
 
+    /* FULLSCREEN DISABLE SAFEGUARD FOR BROWSERS */
+    video::-webkit-media-controls-fullscreen-button {
+      display: none !important;
+    }
+
     /* CANDLE & VIGIL SECTION */
     .candle-section {
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(243, 235, 221, 0.9));
@@ -1096,7 +1101,14 @@
         </div>
 
         <div class="video-container">
-          <video id="nanaVideoElement" class="video-element" playsinline controls preload="metadata">
+          <video 
+            id="nanaVideoElement" 
+            class="video-element" 
+            playsinline 
+            webkit-playsinline 
+            controls 
+            controlsList="nofullscreen nodownload" 
+            preload="metadata">
             <source src="nana-video.mp4" type="video/mp4">
             Your browser does not support HTML video.
           </video>
